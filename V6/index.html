@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Moe Kyaw Aung — Senior Android Developer. Holographic Iridescent Portfolio."/>
+<title>MKA · HOLOGRAPHIC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#08070f;
+  --dark:#0d0b18;
+  --panel:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);
+  --text:#f0eeff;
+  --muted:rgba(240,238,255,0.55);
+  --holo1:#ff6eb4;
+  --holo2:#a78bfa;
+  --holo3:#38bdf8;
+  --holo4:#34d399;
+  --holo5:#fbbf24;
+  --holo-grad:linear-gradient(135deg,#ff6eb4,#a78bfa,#38bdf8,#34d399,#fbbf24,#ff6eb4);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);
+  color:var(--text);
+  font-family:'Space Grotesk',sans-serif;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* HOLO BG ORBS */
+.orb{
+  position:fixed;border-radius:50%;filter:blur(80px);
+  pointer-events:none;z-index:0;animation:drift 12s ease-in-out infinite;
+}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,rgba(167,139,250,0.12),transparent 70%);top:-100px;left:-100px;animation-delay:0s}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(56,189,248,0.1),transparent 70%);top:40%;right:-80px;animation-delay:-4s}
+.orb3{width:450px;height:450px;background:radial-gradient(circle,rgba(255,110,180,0.08),transparent 70%);bottom:-100px;left:30%;animation-delay:-8s}
+@keyframes drift{0%,100%{transform:translate(0,0)}33%{transform:translate(30px,-20px)}66%{transform:translate(-20px,30px)}}
+
+/* CUSTOM CURSOR */
+#cur{
+  position:fixed;width:10px;height:10px;border-radius:50%;
+  background:var(--holo-grad);background-size:300% 300%;
+  animation:holoSpin 3s linear infinite;
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+  box-shadow:0 0 20px rgba(167,139,250,0.8);
+}
+#cur2{
+  position:fixed;width:42px;height:42px;border-radius:50%;
+  border:1px solid rgba(167,139,250,0.4);
+  pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
+  transition:transform .08s;
+}
+@keyframes holoSpin{0%{background-position:0% 0%}50%{background-position:100% 100%}100%{background-position:0% 0%}}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:1.25rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,7,15,0.8);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.1rem;font-weight:700;
+  letter-spacing:0.05em;text-decoration:none;
+  background:var(--holo-grad);background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:holoSpin 4s linear infinite;
+}
+.nav-links{list-style:none;display:flex;gap:2.5rem}
+.nav-links a{
+  font-size:0.78rem;letter-spacing:0.05em;font-weight:400;
+  color:var(--muted);text-decoration:none;
+  transition:color .3s;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-badge{
+  font-size:0.7rem;letter-spacing:0.1em;font-weight:500;
+  padding:0.55rem 1.4rem;border-radius:100px;
+  text-decoration:none;
+  background:linear-gradient(135deg,rgba(167,139,250,0.15),rgba(56,189,248,0.15));
+  border:1px solid rgba(167,139,250,0.3);
+  color:var(--holo2);
+  transition:background .3s,border-color .3s;
+  position:relative;overflow:hidden;
+}
+.nav-badge::before{
+  content:'';position:absolute;inset:0;border-radius:100px;
+  background:var(--holo-grad);background-size:300% 300%;
+  animation:holoSpin 4s linear infinite;
+  opacity:0;transition:opacity .3s;
+}
+.nav-badge:hover::before{opacity:0.15}
+.nav-badge span{position:relative;z-index:1}
+
+/* HERO */
+#hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:6rem 2rem 4rem;
+}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  font-size:0.72rem;letter-spacing:0.08em;
+  color:var(--muted);
+  padding:0.45rem 1.25rem;border-radius:100px;
+  border:1px solid var(--border);
+  background:var(--panel);backdrop-filter:blur(12px);
+  margin-bottom:2.5rem;
+}
+.hero-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--holo-grad);background-size:300% 300%;
+  animation:holoSpin 2s linear infinite;
+  box-shadow:0 0 8px rgba(167,139,250,0.8);
+}
+/* Holo avatar */
+.holo-avatar-wrap{
+  position:relative;width:160px;height:160px;
+  margin:0 auto 2.5rem;
+}
+.ha-glow{
+  position:absolute;inset:-20px;border-radius:50%;
+  background:var(--holo-grad);background-size:300% 300%;
+  animation:holoSpin 4s linear infinite;
+  filter:blur(16px);opacity:0.5;
+}
+.ha-ring{
+  position:absolute;inset:-4px;border-radius:50%;
+  background:var(--holo-grad);background-size:300% 300%;
+  animation:holoSpin 4s linear infinite;
+  padding:2px;
+}
+.ha-inner{
+  position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden;
+  background:var(--void);
+}
+.ha-inner img{width:100%;height:100%;object-fit:cover}
+.ha-inner::after{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(135deg,rgba(167,139,250,0.2),transparent 60%);
+}
+/* Hero text */
+.hero-tag{
+  font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--holo2);margin-bottom:1rem;font-weight:500;
+}
+.hero-title{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(3.5rem,8vw,7rem);
+  line-height:0.95;letter-spacing:-0.03em;
+  color:var(--text);margin-bottom:0.5rem;
+}
+.hero-title .holo-text{
+  background:var(--holo-grad);background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:holoSpin 4s linear infinite;
+}
+.hero-sub{
+  font-size:1rem;font-weight:300;color:var(--muted);
+  margin:1.5rem 0 2.5rem;letter-spacing:0.02em;
+}
+.hero-sub strong{color:var(--text);font-weight:500}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-holo{
+  font-size:0.78rem;letter-spacing:0.05em;font-weight:600;
+  padding:0.9rem 2.2rem;border-radius:100px;text-decoration:none;
+  background:var(--holo-grad);background-size:300% 300%;
+  animation:holoSpin 4s linear infinite;
+  color:var(--void);
+  transition:transform .3s,box-shadow .3s;
+}
+.btn-holo:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(167,139,250,0.35)}
+.btn-holo-ghost{
+  font-size:0.78rem;letter-spacing:0.05em;font-weight:500;
+  padding:0.9rem 2.2rem;border-radius:100px;text-decoration:none;
+  border:1px solid var(--border);color:var(--text);
+  background:var(--panel);backdrop-filter:blur(12px);
+  transition:border-color .3s,background .3s;
+}
+.btn-holo-ghost:hover{border-color:rgba(167,139,250,0.4);background:rgba(167,139,250,0.06)}
+
+/* MARQUEE */
+.marquee-strip{
+  position:relative;z-index:1;
+  padding:1rem 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;background:rgba(255,255,255,0.02);
+}
+.marquee-inner{
+  display:flex;gap:3rem;animation:marquee 25s linear infinite;white-space:nowrap;
+}
+.mi-item{
+  display:flex;align-items:center;gap:1rem;
+  font-size:0.72rem;letter-spacing:0.15em;font-weight:500;text-transform:uppercase;
+  color:var(--muted);
+}
+.mi-dot{
+  width:5px;height:5px;border-radius:50%;flex-shrink:0;
+  background:var(--holo-grad);background-size:300% 300%;
+  animation:holoSpin 3s linear infinite;
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* GLASS CARD */
+.g-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-radius:20px;
+  backdrop-filter:blur(12px);
+  position:relative;overflow:hidden;
+}
+.g-card::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(167,139,250,0.4),transparent);
+}
+
+/* ABOUT */
+#about{
+  position:relative;z-index:1;
+  padding:6rem 4rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+}
+.about-card{
+  padding:3rem;
+}
+.about-chip{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--holo2);
+  padding:0.3rem 0.9rem;border-radius:100px;
+  border:1px solid rgba(167,139,250,0.2);
+  background:rgba(167,139,250,0.06);
+  margin-bottom:1.5rem;
+}
+.about-h{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(2rem,4vw,3rem);font-weight:700;
+  letter-spacing:-0.02em;line-height:1.1;
+  color:var(--text);margin-bottom:1.25rem;
+}
+.about-h .ht{
+  background:var(--holo-grad);background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:holoSpin 4s linear infinite;
+}
+.about-p{font-size:0.9rem;line-height:1.85;color:var(--muted);margin-bottom:1rem;font-weight:300}
+.tech-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:1.5rem;
+}
+.tech-item{
+  display:flex;align-items:center;gap:0.6rem;
+  font-size:0.75rem;color:var(--muted);font-weight:400;
+  padding:0.6rem 0.8rem;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--panel);
+  transition:border-color .3s;
+}
+.tech-item:hover{border-color:rgba(167,139,250,0.3)}
+.tech-icon{
+  width:20px;height:20px;border-radius:6px;
+  background:var(--holo-grad);background-size:300% 300%;
+  animation:holoSpin 4s linear infinite;
+  flex-shrink:0;
+}
+/* About image panel */
+.about-visual-panel{
+  display:flex;flex-direction:column;gap:1.5rem;
+}
+.av-main{
+  position:relative;border-radius:20px;overflow:hidden;
+}
+.av-main img{
+  width:100%;aspect-ratio:3/4;object-fit:cover;
+  filter:saturate(0.8);
+}
+.av-main::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(167,139,250,0.2),rgba(56,189,248,0.1));
+  pointer-events:none;
+}
+.av-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.avs-item{
+  padding:1.25rem 1rem;border-radius:14px;text-align:center;
+}
+.avs-n{
+  font-size:1.8rem;font-weight:700;letter-spacing:-0.02em;
+  background:var(--holo-grad);background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:holoSpin 4s linear infinite;
+  line-height:1;
+}
+.avs-l{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem}
+
+/* SKILLS */
+#skills{
+  position:relative;z-index:1;padding:6rem 4rem;
+}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:3rem;
+}
+.sh-left h2{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(2rem,4vw,3rem);font-weight:700;
+  letter-spacing:-0.02em;color:var(--text);
+}
+.sh-left h2 span{
+  background:var(--holo-grad);background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:holoSpin 4s linear infinite;
+}
+.sh-sub{font-size:0.78rem;color:var(--muted);margin-top:0.4rem}
+.skills-holo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.shg-card{
+  padding:2rem;border-radius:18px;
+  transition:transform .3s,box-shadow .3s;
+  cursor:none;
+}
+.shg-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+}
+.shg-icon{
+  width:48px;height:48px;border-radius:14px;
+  background:var(--holo-grad);background-size:300% 300%;
+  animation:holoSpin 4s linear infinite;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin-bottom:1.25rem;
+  color:var(--void);
+}
+.shg-title{
+  font-size:1rem;font-weight:600;letter-spacing:-0.01em;
+  color:var(--text);margin-bottom:0.5rem;
+}
+.shg-desc{font-size:0.78rem;line-height:1.7;color:var(--muted);margin-bottom:1.25rem}
+.shg-bar{height:3px;border-radius:100px;background:rgba(255,255,255,0.06);overflow:hidden}
+.shg-fill{
+  height:100%;width:0;border-radius:100px;
+  background:var(--holo-grad);background-size:300% 100%;
+  animation:holoSpin 4s linear infinite;
+  transition:width 1.5s ease;
+}
+.shg-pct{font-size:0.65rem;color:var(--muted);margin-top:0.4rem;text-align:right}
+
+/* WORK */
+#work{position:relative;z-index:1;padding:6rem 4rem}
+.work-holo-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.25rem;margin-top:3rem;
+}
+.whg-card{
+  border-radius:18px;overflow:hidden;
+  transition:transform .3s;cursor:none;
+}
+.whg-card:hover{transform:translateY(-5px)}
+.whg-img-wrap{position:relative;overflow:hidden;aspect-ratio:16/10}
+.whg-img-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(0.7);transition:filter .4s,transform .4s;
+}
+.whg-card:hover .whg-img-wrap img{filter:saturate(1);transform:scale(1.05)}
+.whg-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,7,15,0.95),transparent 50%);
+}
+.whg-tags{
+  position:absolute;top:1rem;left:1rem;
+  display:flex;gap:0.4rem;flex-wrap:wrap;
+}
+.whg-tag{
+  font-size:0.58rem;letter-spacing:0.1em;
+  padding:0.25rem 0.65rem;border-radius:100px;
+  background:rgba(8,7,15,0.7);
+  border:1px solid var(--border);
+  color:var(--muted);
+  backdrop-filter:blur(8px);
+}
+.whg-body{
+  padding:1.5rem;
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-top:none;
+  border-radius:0 0 18px 18px;
+}
+.whg-num{
+  font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--holo2);margin-bottom:0.4rem;
+}
+.whg-title{
+  font-size:1.05rem;font-weight:600;letter-spacing:-0.01em;
+  color:var(--text);margin-bottom:0.4rem;
+}
+.whg-desc{font-size:0.75rem;line-height:1.65;color:var(--muted)}
+
+/* TESTIMONIALS */
+#testi{position:relative;z-index:1;padding:6rem 4rem;background:rgba(255,255,255,0.01)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem}
+.tg-card{padding:2rem;border-radius:18px}
+.tg-quote{
+  font-size:0.87rem;line-height:1.85;color:var(--muted);
+  margin-bottom:1.5rem;font-style:italic;font-weight:300;
+}
+.tg-quote::before{content:'"';font-size:2rem;color:var(--holo2);line-height:0;vertical-align:-0.6rem;margin-right:0.2rem}
+.tg-person{display:flex;align-items:center;gap:0.75rem}
+.tg-avatar{
+  width:42px;height:42px;border-radius:50%;object-fit:cover;
+  border:2px solid rgba(167,139,250,0.3);
+}
+.tg-name{font-size:0.82rem;font-weight:600;color:var(--text)}
+.tg-role{font-size:0.68rem;color:var(--muted)}
+
+/* CONTACT */
+#contact{position:relative;z-index:1;padding:6rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.contact-holo h2{
+  font-size:clamp(2.5rem,5vw,4rem);font-weight:700;
+  letter-spacing:-0.03em;line-height:1;
+  color:var(--text);margin-bottom:1rem;
+}
+.contact-holo h2 span{
+  background:var(--holo-grad);background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:holoSpin 4s linear infinite;
+}
+.contact-holo p{font-size:0.87rem;line-height:1.8;color:var(--muted);margin-bottom:2rem}
+.contact-info-grid{display:flex;flex-direction:column;gap:0.75rem}
+.ci-holo{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.25rem;border-radius:14px;
+}
+.ci-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--holo-grad);background-size:300% 300%;
+  animation:holoSpin 4s linear infinite;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;flex-shrink:0;color:var(--void);
+}
+.ci-text h4{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--holo2);margin-bottom:0.15rem}
+.ci-text p,.ci-text a{font-size:0.82rem;color:var(--text);text-decoration:none}
+.ci-text a:hover{color:var(--holo2)}
+.holo-form{display:flex;flex-direction:column;gap:1.25rem}
+.hf-group{}
+.hf-label{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--holo2);display:block;margin-bottom:0.5rem}
+.hf-input{
+  width:100%;border-radius:12px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  color:var(--text);
+  font-family:'Space Grotesk',sans-serif;font-size:0.88rem;
+  padding:0.85rem 1rem;outline:none;
+  transition:border-color .3s,box-shadow .3s;
+  backdrop-filter:blur(8px);
+}
+.hf-input:focus{
+  border-color:rgba(167,139,250,0.5);
+  box-shadow:0 0 0 3px rgba(167,139,250,0.08);
+}
+.hf-input::placeholder{color:rgba(240,238,255,0.2)}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  padding:2.5rem 4rem;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;
+}
+.footer-holo-logo{
+  font-size:1.2rem;font-weight:700;letter-spacing:-0.01em;
+  background:var(--holo-grad);background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:holoSpin 4s linear infinite;
+}
+.footer-copy{font-size:0.65rem;letter-spacing:0.1em;color:rgba(240,238,255,0.25)}
+.footer-socials{display:flex;gap:0.75rem}
+.footer-socials a{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:0.8rem;text-decoration:none;
+  transition:border-color .3s,background .3s;
+}
+.footer-socials a:hover{border-color:rgba(167,139,250,0.4);background:rgba(167,139,250,0.08);color:var(--text)}
+
+/* BACK TOP */
+#btt{
+  position:fixed;bottom:2rem;right:2rem;z-index:900;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--holo-grad);background-size:300% 300%;
+  animation:holoSpin 4s linear infinite;
+  border:none;cursor:none;color:var(--void);font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(0.8);
+  transition:opacity .3s,transform .3s;
+  box-shadow:0 0 24px rgba(167,139,250,0.4);
+}
+#btt.show{opacity:1;transform:scale(1)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+@media(max-width:1024px){
+  nav{padding:1rem 2rem}.nav-links{display:none}
+  #about{grid-template-columns:1fr;padding:4rem 2rem;gap:3rem}
+  .about-visual-panel{display:none}
+  .skills-holo-grid{grid-template-columns:1fr 1fr;padding:0}
+  #skills,#work,#contact,#testi{padding:4rem 2rem}
+  .work-holo-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr}
+  #contact{grid-template-columns:1fr}
+  footer{padding:2rem}
+}
+@media(max-width:640px){
+  .skills-holo-grid,.work-holo-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+<div id="cur"></div><div id="cur2"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">MKA ✦</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-badge"><span>Hire Me ↗</span></a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="hero-pill"><div class="hero-dot"></div>Available for projects · Senior Android Dev</div>
+    <div class="holo-avatar-wrap">
+      <div class="ha-glow"></div>
+      <div class="ha-ring">
+        <div class="ha-inner">
+          <img src="https://0.gravatar.com/avatar/a2dae9a29fbf7c72552047efc744be54a018938aacd9009e7500f93d72eb0f2e?size=320" alt="Moe Kyaw Aung"/>
+        </div>
+      </div>
+    </div>
+    <div class="hero-tag">မိုးကျော်အောင် · Microsoft · Tachileik, Myanmar 🇲🇲</div>
+    <h1 class="hero-title">
+      MOE <span class="holo-text">KYAW</span><br>AUNG
+    </h1>
+    <p class="hero-sub">
+      <strong>Senior Android Developer</strong> with 12+ years crafting secure,<br>
+      scalable mobile apps — Kotlin · Compose · Firebase · Clean Arch
+    </p>
+    <div class="hero-btns">
+      <a href="#work" class="btn-holo">View Portfolio ✦</a>
+      <a href="#contact" class="btn-holo-ghost">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="mi-item"><div class="mi-dot"></div>Kotlin</span>
+    <span class="mi-item"><div class="mi-dot"></div>Jetpack Compose</span>
+    <span class="mi-item"><div class="mi-dot"></div>Clean Architecture</span>
+    <span class="mi-item"><div class="mi-dot"></div>Firebase</span>
+    <span class="mi-item"><div class="mi-dot"></div>MVVM</span>
+    <span class="mi-item"><div class="mi-dot"></div>CI/CD</span>
+    <span class="mi-item"><div class="mi-dot"></div>Ethical Hacking</span>
+    <span class="mi-item"><div class="mi-dot"></div>ML Kit</span>
+    <span class="mi-item"><div class="mi-dot"></div>Room DB</span>
+    <span class="mi-item"><div class="mi-dot"></div>Hilt · Dagger</span>
+    <!-- duplicate -->
+    <span class="mi-item"><div class="mi-dot"></div>Kotlin</span>
+    <span class="mi-item"><div class="mi-dot"></div>Jetpack Compose</span>
+    <span class="mi-item"><div class="mi-dot"></div>Clean Architecture</span>
+    <span class="mi-item"><div class="mi-dot"></div>Firebase</span>
+    <span class="mi-item"><div class="mi-dot"></div>MVVM</span>
+    <span class="mi-item"><div class="mi-dot"></div>CI/CD</span>
+    <span class="mi-item"><div class="mi-dot"></div>Ethical Hacking</span>
+    <span class="mi-item"><div class="mi-dot"></div>ML Kit</span>
+    <span class="mi-item"><div class="mi-dot"></div>Room DB</span>
+    <span class="mi-item"><div class="mi-dot"></div>Hilt · Dagger</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="g-card about-card reveal">
+    <div class="about-chip">✦ Senior Android Developer</div>
+    <h2 class="about-h">Building Apps<br>That <span class="ht">Scale.</span></h2>
+    <p class="about-p">I'm Moe Kyaw Aung (မိုးကျော်အောင်), Senior Android Developer at Microsoft. Nearly 12 years engineering production Android applications — secure by design, clean by architecture.</p>
+    <p class="about-p">From Kotlin coroutines to CI/CD pipelines, I own the full delivery cycle. Clean code, tested foundations, and practical security are non-negotiables in everything I build.</p>
+    <div class="tech-grid">
+      <div class="tech-item"><div class="tech-icon"></div>Kotlin / Java</div>
+      <div class="tech-item"><div class="tech-icon"></div>Jetpack Compose</div>
+      <div class="tech-item"><div class="tech-icon"></div>MVVM / Clean Arch</div>
+      <div class="tech-item"><div class="tech-icon"></div>Firebase Suite</div>
+      <div class="tech-item"><div class="tech-icon"></div>GitHub Actions</div>
+      <div class="tech-item"><div class="tech-icon"></div>Ethical Hacking</div>
+      <div class="tech-item"><div class="tech-icon"></div>ML Kit / TFLite</div>
+      <div class="tech-item"><div class="tech-icon"></div>Claude API</div>
+    </div>
+  </div>
+  <div class="about-visual-panel reveal">
+    <div class="av-main g-card">
+      <img src="https://0.gravatar.com/avatar/a2dae9a29fbf7c72552047efc744be54a018938aacd9009e7500f93d72eb0f2e?size=600" alt="Moe Kyaw Aung"/>
+    </div>
+    <div class="av-stats">
+      <div class="g-card avs-item"><div class="avs-n">12+</div><div class="avs-l">Years</div></div>
+      <div class="g-card avs-item"><div class="avs-n">48+</div><div class="avs-l">Apps</div></div>
+      <div class="g-card avs-item"><div class="avs-n">35+</div><div class="avs-l">Certs</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-head reveal">
+    <div class="sh-left">
+      <h2>Core <span>Expertise</span></h2>
+      <div class="sh-sub">12+ years — Android · Security · AI/ML · DevOps</div>
+    </div>
+  </div>
+  <div class="skills-holo-grid">
+    <div class="shg-card g-card reveal">
+      <div class="shg-icon">◈</div>
+      <div class="shg-title">Android Development</div>
+      <div class="shg-desc">Kotlin, Compose, Material 3, full lifecycle with modern Jetpack libraries and coroutines.</div>
+      <div class="shg-bar"><div class="shg-fill" data-w="98"></div></div>
+      <div class="shg-pct">98%</div>
+    </div>
+    <div class="shg-card g-card reveal">
+      <div class="shg-icon">◇</div>
+      <div class="shg-title">Clean Architecture</div>
+      <div class="shg-desc">MVVM, Clean Arch, Hilt DI, multi-module Gradle. Systems built to scale over years.</div>
+      <div class="shg-bar"><div class="shg-fill" data-w="96"></div></div>
+      <div class="shg-pct">96%</div>
+    </div>
+    <div class="shg-card g-card reveal">
+      <div class="shg-icon">◉</div>
+      <div class="shg-title">Firebase & APIs</div>
+      <div class="shg-desc">Firestore, Functions, Auth, Crashlytics. REST APIs with Retrofit + Room offline caching.</div>
+      <div class="shg-bar"><div class="shg-fill" data-w="94"></div></div>
+      <div class="shg-pct">94%</div>
+    </div>
+    <div class="shg-card g-card reveal">
+      <div class="shg-icon">◆</div>
+      <div class="shg-title">Security Engineering</div>
+      <div class="shg-desc">Ethical hacking, pen testing, cert pinning, ProGuard. Security-first from day one.</div>
+      <div class="shg-bar"><div class="shg-fill" data-w="88"></div></div>
+      <div class="shg-pct">88%</div>
+    </div>
+    <div class="shg-card g-card reveal">
+      <div class="shg-icon">◈</div>
+      <div class="shg-title">CI/CD & DevOps</div>
+      <div class="shg-desc">5-workflow GitHub Actions: lint, tests, signing, release. Fully automated delivery.</div>
+      <div class="shg-bar"><div class="shg-fill" data-w="92"></div></div>
+      <div class="shg-pct">92%</div>
+    </div>
+    <div class="shg-card g-card reveal">
+      <div class="shg-icon">◇</div>
+      <div class="shg-title">AI / ML Integration</div>
+      <div class="shg-desc">TFLite, ML Kit, Claude API, Gemini. On-device and cloud AI for intelligent features.</div>
+      <div class="shg-bar"><div class="shg-fill" data-w="85"></div></div>
+      <div class="shg-pct">85%</div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-head reveal">
+    <div class="sh-left">
+      <h2>Selected <span>Work</span></h2>
+      <div class="sh-sub">Production apps · Open source · Enterprise solutions</div>
+    </div>
+  </div>
+  <div class="work-holo-grid">
+    <div class="whg-card reveal">
+      <div class="whg-img-wrap">
+        <img src="https://picsum.photos/seed/holo1/600/375" alt="MoekyawTranslator"/>
+        <div class="whg-overlay"></div>
+        <div class="whg-tags"><span class="whg-tag">Kotlin</span><span class="whg-tag">Claude API</span></div>
+      </div>
+      <div class="whg-body">
+        <div class="whg-num">01</div>
+        <div class="whg-title">MoekyawTranslator</div>
+        <div class="whg-desc">Flagship multilingual app with Claude AI, 8 languages, TTS, offline mode and Firebase sync.</div>
+      </div>
+    </div>
+    <div class="whg-card reveal">
+      <div class="whg-img-wrap">
+        <img src="https://picsum.photos/seed/holo2/600/375" alt="PulseSync"/>
+        <div class="whg-overlay"></div>
+        <div class="whg-tags"><span class="whg-tag">Azure</span><span class="whg-tag">MSAL</span></div>
+      </div>
+      <div class="whg-body">
+        <div class="whg-num">02</div>
+        <div class="whg-title">PulseSync Azure</div>
+        <div class="whg-desc">Enterprise Android — MSAL, Graph API, Azure OpenAI, Cosmos DB, SignalR real-time messaging.</div>
+      </div>
+    </div>
+    <div class="whg-card reveal">
+      <div class="whg-img-wrap">
+        <img src="https://picsum.photos/seed/holo3/600/375" alt="Compose System"/>
+        <div class="whg-overlay"></div>
+        <div class="whg-tags"><span class="whg-tag">Compose</span><span class="whg-tag">M3</span></div>
+      </div>
+      <div class="whg-body">
+        <div class="whg-num">03</div>
+        <div class="whg-title">Compose Design System</div>
+        <div class="whg-desc">100+ reusable components with Material 3 theming, accessibility tokens, dark/light support.</div>
+      </div>
+    </div>
+    <div class="whg-card reveal">
+      <div class="whg-img-wrap">
+        <img src="https://picsum.photos/seed/holo4/600/375" alt="CI/CD Suite"/>
+        <div class="whg-overlay"></div>
+        <div class="whg-tags"><span class="whg-tag">GitHub Actions</span><span class="whg-tag">DevOps</span></div>
+      </div>
+      <div class="whg-body">
+        <div class="whg-num">04</div>
+        <div class="whg-title">Android CI/CD Suite</div>
+        <div class="whg-desc">5 production workflows: lint, unit tests, instrumented tests, signing, auto Play Store release.</div>
+      </div>
+    </div>
+    <div class="whg-card reveal">
+      <div class="whg-img-wrap">
+        <img src="https://picsum.photos/seed/holo5/600/375" alt="Acode Plugin"/>
+        <div class="whg-overlay"></div>
+        <div class="whg-tags"><span class="whg-tag">JavaScript</span><span class="whg-tag">Plugin</span></div>
+      </div>
+      <div class="whg-body">
+        <div class="whg-num">05</div>
+        <div class="whg-title">Acode DevX Plugin</div>
+        <div class="whg-desc">Published plugin v2.0.42 — 13 syntax themes, 1200+ active installs in the mobile IDE ecosystem.</div>
+      </div>
+    </div>
+    <div class="whg-card reveal">
+      <div class="whg-img-wrap">
+        <img src="https://picsum.photos/seed/holo6/600/375" alt="Thailand Hub"/>
+        <div class="whg-overlay"></div>
+        <div class="whg-tags"><span class="whg-tag">Room DB</span><span class="whg-tag">Offline</span></div>
+      </div>
+      <div class="whg-body">
+        <div class="whg-num">06</div>
+        <div class="whg-title">Thailand Resources Hub</div>
+        <div class="whg-desc">Bilingual community app for Myanmar nationals in Thailand — offline-first, legal resources, emergency contacts.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testi">
+  <div class="section-head reveal">
+    <div class="sh-left">
+      <h2>Client <span>Reviews</span></h2>
+      <div class="sh-sub">What people say about working with me</div>
+    </div>
+  </div>
+  <div class="testi-grid">
+    <div class="tg-card g-card reveal">
+      <div class="tg-quote">Moe delivered a complete MVVM app in record time. The architecture is impeccably clean and the app hasn't had a single crash in 8 months of production use.</div>
+      <div class="tg-person">
+        <img src="https://picsum.photos/seed/tp1/80/80" class="tg-avatar" alt="Sarah K."/>
+        <div><div class="tg-name">Sarah K.</div><div class="tg-role">CTO · FinTech Startup, Singapore</div></div>
+      </div>
+    </div>
+    <div class="tg-card g-card reveal">
+      <div class="tg-quote">The CI/CD pipeline Moe configured with GitHub Actions saves our team 4+ hours every week. Completely automated — lint, tests, signing, and Play Store release.</div>
+      <div class="tg-person">
+        <img src="https://picsum.photos/seed/tp2/80/80" class="tg-avatar" alt="Arjun M."/>
+        <div><div class="tg-name">Arjun M.</div><div class="tg-role">Lead Engineer · E-Commerce, India</div></div>
+      </div>
+    </div>
+    <div class="tg-card g-card reveal">
+      <div class="tg-quote">Working with Moe felt like having a senior Android architect in-house. His understanding of Firebase, security, and Compose is absolutely top-tier.</div>
+      <div class="tg-person">
+        <img src="https://picsum.photos/seed/tp3/80/80" class="tg-avatar" alt="Khin M."/>
+        <div><div class="tg-name">Khin M.</div><div class="tg-role">Founder · MyanmarTech App, Yangon</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-holo reveal">
+    <h2>Let's <span>Build</span><br>Together.</h2>
+    <p>Available for Android development, architecture consulting, security reviews, and AI/ML integrations. Based in Myanmar, available globally.</p>
+    <div class="contact-info-grid">
+      <div class="ci-holo g-card"><div class="ci-icon">✉</div><div class="ci-text"><h4>Email</h4><a href="mailto:moekyawaung@fastmail.com">moekyawaung@fastmail.com</a></div></div>
+      <div class="ci-holo g-card"><div class="ci-icon">◈</div><div class="ci-text"><h4>GitHub</h4><a href="https://github.com/Dev-moe-kyawaung" target="_blank">Dev-moe-kyawaung</a></div></div>
+      <div class="ci-holo g-card"><div class="ci-icon">◉</div><div class="ci-text"><h4>Location</h4><p>Tachileik, Myanmar 🇲🇲</p></div></div>
+      <div class="ci-holo g-card"><div class="ci-icon">◆</div><div class="ci-text"><h4>Company</h4><p>Microsoft · Senior Android Dev</p></div></div>
+    </div>
+  </div>
+  <form class="holo-form reveal" onsubmit="cf(event)">
+    <div class="hf-group"><label class="hf-label">Name</label><input type="text" class="hf-input" placeholder="Kyaw Zin Thant" required/></div>
+    <div class="hf-group"><label class="hf-label">Email</label><input type="email" class="hf-input" placeholder="hello@example.com" required/></div>
+    <div class="hf-group"><label class="hf-label">Message</label><textarea class="hf-input" rows="5" placeholder="Tell me about your project..." required style="resize:none"></textarea></div>
+    <button type="submit" class="btn-holo" style="border:none;cursor:none">Send Message ✦</button>
+    <div id="ok" style="display:none;font-size:.72rem;letter-spacing:.15em;margin-top:.75rem;background:var(--holo-grad);background-size:300% 300%;animation:holoSpin 4s linear infinite;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+      ✦ MESSAGE SENT — I'll reply within 24 hours
+    </div>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-holo-logo">MKA ✦ 2025</div>
+  <div class="footer-copy">© Moe Kyaw Aung · မိုးကျော်အောင် · Portfolio V8 Holographic</div>
+  <div class="footer-socials">
+    <a href="https://github.com/Dev-moe-kyawaung" target="_blank" title="GitHub">GH</a>
+    <a href="https://www.linkedin.com/in/moe-kyaw-aung-2653093a1" target="_blank" title="LinkedIn">LI</a>
+    <a href="https://bsky.app/profile/moekyawaung96.bsky.social" target="_blank" title="Bluesky">BS</a>
+    <a href="https://tiktok.com/@moelay262411" target="_blank" title="TikTok">TK</a>
+    <a href="https://www.youtube.com/channel/UCdGC3lLlIPnb2VIL_qS65OQ" target="_blank" title="YouTube">YT</a>
+  </div>
+</footer>
+<button id="btt" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cur2.style.left=rx+'px';cur2.style.top=ry+'px';requestAnimationFrame(a)})();
+const obs=new IntersectionObserver(e=>e.forEach(en=>{
+  if(en.isIntersecting){en.target.classList.add('in');en.target.querySelectorAll('.shg-fill').forEach(b=>b.style.width=b.dataset.w+'%')}
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+addEventListener('scroll',()=>document.getElementById('btt').classList.toggle('show',scrollY>400));
+function cf(e){e.preventDefault();document.getElementById('ok').style.display='block';e.target.reset();setTimeout(()=>document.getElementById('ok').style.display='none',6000)}
+</script>
+</body>
+</html>
