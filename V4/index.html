@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Moe Kyaw Aung — Senior Android Developer. Japandi Zen Portfolio."/>
+<title>MKA · ZEN MINIMAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400&family=Shippori+Mincho:wght@400;600&family=DM+Sans:ital,wght@0,200;0,300;0,400;1,200&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1c1814;
+  --charcoal:#2d2a26;
+  --warm-grey:#6b6560;
+  --rice:#f5f0e8;
+  --cream:#ede5d8;
+  --parchment:#e2d5c0;
+  --clay:#b08a6e;
+  --terracotta:#9c5e3e;
+  --moss:#5c7a5a;
+  --washi:rgba(245,240,232,0.92);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--rice);
+  color:var(--ink);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+}
+
+/* NOISE TEXTURE */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9998;opacity:0.5;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:1.5rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(176,138,110,0.15);
+}
+.nav-logo{
+  font-family:'Shippori Mincho',serif;
+  font-size:1.1rem;letter-spacing:0.2em;
+  color:var(--ink);text-decoration:none;
+}
+.nav-logo span{
+  font-size:0.65rem;letter-spacing:0.3em;
+  color:var(--warm-grey);display:block;
+  font-family:'DM Sans',sans-serif;font-weight:300;
+}
+.nav-links{list-style:none;display:flex;gap:2.5rem}
+.nav-links a{
+  font-size:0.72rem;letter-spacing:0.2em;font-weight:300;
+  text-transform:uppercase;color:var(--warm-grey);
+  text-decoration:none;transition:color .3s;
+  position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;
+  background:var(--clay);transform:scaleX(0);transition:transform .3s;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+/* HERO */
+#hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  padding-top:80px;
+}
+.hero-left{
+  display:flex;align-items:center;
+  padding:5rem 4rem;
+  border-right:1px solid rgba(176,138,110,0.2);
+}
+.hero-content{}
+.hero-kanji{
+  font-family:'Noto Serif JP',serif;font-weight:200;
+  font-size:7rem;line-height:1;letter-spacing:-0.05em;
+  color:rgba(28,24,20,0.06);
+  position:absolute;left:3rem;top:50%;transform:translateY(-50%);
+  pointer-events:none;user-select:none;
+  writing-mode:vertical-rl;text-orientation:mixed;
+}
+.hero-overline{
+  font-size:0.65rem;letter-spacing:0.45em;text-transform:uppercase;
+  color:var(--clay);margin-bottom:2rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.hero-overline::before{content:'—';color:var(--parchment)}
+.hero-name-jp{
+  font-family:'Noto Serif JP',serif;font-weight:200;
+  font-size:1.5rem;letter-spacing:0.2em;
+  color:var(--warm-grey);margin-bottom:0.5rem;
+}
+.hero-name{
+  font-family:'Shippori Mincho',serif;
+  font-size:clamp(3rem,6vw,5.5rem);
+  font-weight:400;line-height:1.05;
+  color:var(--ink);margin-bottom:2rem;
+}
+.hero-role{
+  font-size:0.78rem;letter-spacing:0.3em;font-weight:300;
+  text-transform:uppercase;color:var(--warm-grey);
+  margin-bottom:2.5rem;padding-left:1.5rem;
+  border-left:2px solid var(--clay);
+}
+.hero-desc{
+  font-size:0.9rem;line-height:2.1;font-weight:300;
+  color:var(--charcoal);max-width:380px;margin-bottom:3rem;
+}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-zen{
+  font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;
+  padding:0.9rem 2rem;text-decoration:none;
+  background:var(--ink);color:var(--rice);
+  transition:background .3s;font-weight:300;
+}
+.btn-zen:hover{background:var(--charcoal)}
+.btn-zen-outline{
+  font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;
+  padding:0.9rem 2rem;text-decoration:none;
+  border:1px solid rgba(28,24,20,0.3);color:var(--ink);
+  transition:border-color .3s;font-weight:300;
+}
+.btn-zen-outline:hover{border-color:var(--ink)}
+
+/* RIGHT PANEL */
+.hero-right{
+  position:relative;overflow:hidden;
+  background:var(--cream);
+}
+.hero-img-full{
+  width:100%;height:100%;object-fit:cover;
+  filter:sepia(20%)contrast(0.95)brightness(0.95);
+}
+.hero-right-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(245,240,232,0.3),transparent);
+}
+.hero-right-label{
+  position:absolute;bottom:3rem;right:3rem;
+  text-align:right;
+}
+.hrl-n{
+  font-family:'Shippori Mincho',serif;
+  font-size:3.5rem;color:var(--ink);opacity:0.12;line-height:1;
+}
+.hrl-sub{
+  font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--warm-grey);
+}
+
+/* DIVIDER */
+.zen-divider{
+  display:flex;align-items:center;gap:1.5rem;
+  padding:4rem;
+}
+.zd-line{flex:1;height:1px;background:rgba(176,138,110,0.25)}
+.zd-mark{
+  font-family:'Noto Serif JP',serif;font-weight:200;
+  font-size:1.4rem;color:var(--clay);
+}
+
+/* ABOUT */
+#about{
+  padding:5rem 4rem;
+  display:grid;grid-template-columns:1fr 2fr;gap:6rem;
+  border-top:1px solid rgba(176,138,110,0.15);
+}
+.about-label{
+  position:sticky;top:120px;align-self:start;
+}
+.al-num{
+  font-family:'Shippori Mincho',serif;
+  font-size:5rem;color:rgba(28,24,20,0.06);
+  line-height:1;margin-bottom:0.5rem;
+}
+.al-title{
+  font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;
+  color:var(--clay);margin-bottom:0.5rem;
+}
+.al-jp{
+  font-family:'Noto Serif JP',serif;font-weight:300;
+  font-size:1.1rem;color:var(--warm-grey);
+}
+.about-body{}
+.about-h{
+  font-family:'Shippori Mincho',serif;
+  font-size:clamp(2rem,4vw,3.2rem);
+  line-height:1.2;color:var(--ink);margin-bottom:2rem;
+}
+.about-h em{color:var(--terracotta);font-style:italic}
+.about-p{
+  font-size:0.9rem;line-height:2.2;font-weight:300;
+  color:var(--charcoal);margin-bottom:1.5rem;
+}
+.about-avatar{
+  width:120px;height:120px;border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--parchment);
+  box-shadow:0 4px 24px rgba(28,24,20,0.1);
+  margin-bottom:2rem;
+  filter:sepia(15%);
+}
+.skills-inline{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1rem;margin-top:2.5rem;
+}
+.si-item{
+  padding:1.25rem;
+  border:1px solid rgba(176,138,110,0.2);
+  background:rgba(226,213,192,0.3);
+}
+.si-num{
+  font-family:'Shippori Mincho',serif;
+  font-size:2rem;color:var(--clay);line-height:1;
+}
+.si-label{
+  font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--warm-grey);margin-top:0.25rem;
+}
+
+/* SKILLS TABLE */
+#skills{
+  padding:5rem 4rem;
+  background:var(--cream);
+  border-top:1px solid rgba(176,138,110,0.15);
+  border-bottom:1px solid rgba(176,138,110,0.15);
+}
+.skills-table{width:100%;border-collapse:collapse}
+.skills-table thead tr{
+  border-bottom:1px solid rgba(176,138,110,0.3);
+}
+.skills-table th{
+  font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--clay);font-weight:300;
+  padding:0 0 1rem 0;text-align:left;
+}
+.skills-table th:last-child{text-align:right}
+.skills-table tbody tr{
+  border-bottom:1px solid rgba(176,138,110,0.1);
+  transition:background .2s;
+}
+.skills-table tbody tr:hover{background:rgba(176,138,110,0.05)}
+.skills-table td{padding:1.5rem 0;vertical-align:middle}
+.sk-name{
+  font-family:'Shippori Mincho',serif;
+  font-size:1.2rem;color:var(--ink);
+}
+.sk-cat{
+  font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--warm-grey);font-weight:300;
+}
+.sk-bar-wrap{width:200px}
+.sk-bar{height:1px;background:rgba(176,138,110,0.2)}
+.sk-fill{
+  height:100%;background:var(--clay);width:0;
+  transition:width 1.5s ease;
+}
+.sk-pct{text-align:right;font-size:0.75rem;color:var(--warm-grey);font-weight:300}
+
+/* WORK */
+#work{padding:5rem 4rem}
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2rem;margin-top:3rem;
+}
+.work-card{
+  background:var(--cream);
+  border:1px solid rgba(176,138,110,0.2);
+  overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+  cursor:default;
+}
+.work-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(28,24,20,0.08);
+}
+.wc-img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;
+  filter:sepia(15%)contrast(0.95);
+  transition:filter .4s;
+}
+.work-card:hover .wc-img{filter:sepia(5%)}
+.wc-body{padding:1.5rem}
+.wc-cat{
+  font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--clay);margin-bottom:0.5rem;
+}
+.wc-title{
+  font-family:'Shippori Mincho',serif;
+  font-size:1.1rem;color:var(--ink);
+  margin-bottom:0.5rem;line-height:1.3;
+}
+.wc-desc{
+  font-size:0.78rem;line-height:1.8;
+  color:var(--warm-grey);font-weight:300;
+  margin-bottom:1rem;
+}
+.wc-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.wc-tag{
+  font-size:0.58rem;letter-spacing:0.15em;
+  padding:0.25rem 0.6rem;
+  border:1px solid rgba(176,138,110,0.3);
+  color:var(--warm-grey);
+}
+
+/* QUOTE */
+.zen-quote{
+  padding:5rem 4rem;text-align:center;
+  background:var(--ink);color:var(--rice);
+}
+.zq-text{
+  font-family:'Shippori Mincho',serif;
+  font-size:clamp(1.5rem,4vw,2.8rem);
+  font-weight:400;line-height:1.5;
+  max-width:700px;margin:0 auto 1.5rem;
+  letter-spacing:0.02em;
+}
+.zq-text em{color:var(--clay);font-style:italic}
+.zq-attr{
+  font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;
+  color:rgba(245,240,232,0.35);
+}
+
+/* CONTACT */
+#contact{
+  padding:5rem 4rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;
+  border-top:1px solid rgba(176,138,110,0.15);
+}
+.contact-heading{
+  font-family:'Shippori Mincho',serif;
+  font-size:clamp(2.5rem,5vw,4rem);
+  line-height:1.1;color:var(--ink);margin-bottom:1.5rem;
+}
+.contact-heading em{color:var(--terracotta);font-style:italic}
+.contact-p{
+  font-size:0.87rem;line-height:2;font-weight:300;
+  color:var(--charcoal);margin-bottom:2.5rem;
+}
+.c-info{display:flex;flex-direction:column;gap:1.25rem}
+.ci{display:flex;gap:1.5rem;align-items:flex-start}
+.ci-k{
+  font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--clay);min-width:70px;padding-top:0.2rem;
+  font-weight:300;
+}
+.ci-v{font-size:0.87rem;color:var(--charcoal);font-weight:300}
+.ci-v a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+.ci-v a:hover{border-bottom-color:var(--clay)}
+.zen-form{display:flex;flex-direction:column;gap:1.5rem}
+.zf-group{}
+.zf-label{
+  font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--clay);display:block;margin-bottom:0.6rem;font-weight:300;
+}
+.zf-input{
+  width:100%;background:transparent;
+  border:none;border-bottom:1px solid rgba(176,138,110,0.3);
+  color:var(--ink);font-family:'DM Sans',sans-serif;
+  font-size:0.9rem;font-weight:300;padding:0.6rem 0;
+  outline:none;transition:border-color .3s;
+}
+.zf-input:focus{border-bottom-color:var(--clay)}
+.zf-input::placeholder{color:rgba(107,101,96,0.4)}
+
+/* FOOTER */
+footer{
+  padding:3rem 4rem;
+  background:var(--cream);
+  border-top:1px solid rgba(176,138,110,0.2);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;
+}
+.footer-jp{
+  font-family:'Noto Serif JP',serif;font-weight:200;
+  font-size:1.4rem;color:var(--clay);letter-spacing:0.1em;
+}
+.footer-info{
+  font-size:0.65rem;letter-spacing:0.2em;font-weight:300;
+  color:var(--warm-grey);
+}
+.footer-socials{display:flex;gap:2rem}
+.footer-socials a{
+  font-size:0.65rem;letter-spacing:0.2em;font-weight:300;
+  color:var(--warm-grey);text-decoration:none;
+  border-bottom:1px solid transparent;
+  transition:color .3s,border-color .3s;
+}
+.footer-socials a:hover{color:var(--ink);border-bottom-color:var(--clay)}
+
+/* BACK TOP */
+#btt{
+  position:fixed;bottom:2rem;right:2rem;z-index:900;
+  width:44px;height:44px;
+  background:var(--ink);color:var(--rice);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .3s,transform .3s;
+  border-radius:50%;
+}
+#btt.show{opacity:1;transform:translateY(0)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+@media(max-width:1000px){
+  nav{padding:1.25rem 2rem}
+  .nav-links{display:none}
+  #hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:5rem 2rem}
+  #about{grid-template-columns:1fr;padding:4rem 2rem;gap:2rem}
+  .about-label{position:static}
+  #skills{padding:4rem 2rem}
+  .work-grid{grid-template-columns:1fr 1fr}
+  #contact{grid-template-columns:1fr;padding:4rem 2rem;gap:3rem}
+  footer{padding:2rem}
+  .zen-divider{padding:2.5rem 2rem}
+  .zen-quote{padding:4rem 2rem}
+}
+@media(max-width:600px){
+  .work-grid{grid-template-columns:1fr}
+  .skills-inline{grid-template-columns:1fr 1fr}
+  .sk-bar-wrap{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    Moe Kyaw Aung
+    <span>Senior Android Developer</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div style="position:relative">
+      <div class="hero-kanji">技術</div>
+      <div class="hero-content">
+        <div class="hero-overline">Senior Android Developer · Microsoft</div>
+        <div class="hero-name-jp">မိုးကျော်အောင်</div>
+        <h1 class="hero-name">Moe Kyaw<br>Aung</h1>
+        <p class="hero-role">Kotlin · Jetpack Compose · Clean Architecture</p>
+        <p class="hero-desc">Nearly 12 years building mobile applications that are secure, scalable, and crafted with intention. Based in Tachileik, Myanmar.</p>
+        <div class="hero-ctas">
+          <a href="#work" class="btn-zen">View Work</a>
+          <a href="#contact" class="btn-zen-outline">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://0.gravatar.com/avatar/a2dae9a29fbf7c72552047efc744be54a018938aacd9009e7500f93d72eb0f2e?size=800" class="hero-img-full" alt="Moe Kyaw Aung"/>
+    <div class="hero-right-overlay"></div>
+    <div class="hero-right-label">
+      <div class="hrl-n">V8</div>
+      <div class="hrl-sub">Portfolio · 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="zen-divider reveal">
+  <div class="zd-line"></div>
+  <div class="zd-mark">一</div>
+  <div class="zd-line"></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-label reveal">
+    <div class="al-num">01</div>
+    <div class="al-title">About</div>
+    <div class="al-jp">について</div>
+  </div>
+  <div class="reveal">
+    <img src="https://0.gravatar.com/avatar/a2dae9a29fbf7c72552047efc744be54a018938aacd9009e7500f93d72eb0f2e?size=300" class="about-avatar" alt="Moe Kyaw Aung"/>
+    <h2 class="about-h">Engineering With<br><em>Intention &amp; Craft</em></h2>
+    <p class="about-p">I'm a Senior Android Developer at Microsoft, based in Tachileik, Myanmar. With nearly 12 years of hands-on experience, I build production-grade Android applications that prioritise security, scalability, and long-term maintainability.</p>
+    <p class="about-p">My philosophy mirrors wabi-sabi — finding beauty in simplicity and function. Clean architecture over clever shortcuts. Readable code over clever abstractions. Tested foundations over fast features.</p>
+    <div class="skills-inline">
+      <div class="si-item">
+        <div class="si-num">12+</div>
+        <div class="si-label">Years Android</div>
+      </div>
+      <div class="si-item">
+        <div class="si-num">48+</div>
+        <div class="si-label">Apps Shipped</div>
+      </div>
+      <div class="si-item">
+        <div class="si-num">35+</div>
+        <div class="si-label">Certifications</div>
+      </div>
+      <div class="si-item">
+        <div class="si-num">1.2M+</div>
+        <div class="si-label">Downloads</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS TABLE -->
+<section id="skills">
+  <div class="zen-divider" style="padding:0 0 3rem 0">
+    <div class="zd-line"></div>
+    <div class="zd-mark">技</div>
+    <div class="zd-line"></div>
+  </div>
+  <table class="skills-table reveal">
+    <thead>
+      <tr>
+        <th>Skill</th>
+        <th>Category</th>
+        <th style="min-width:200px">Proficiency</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><div class="sk-name">Kotlin / Java</div></td><td><div class="sk-cat">Android Core</div></td><td><div class="sk-bar-wrap"><div class="sk-bar"><div class="sk-fill" data-w="98"></div></div></div></td><td class="sk-pct">98%</td></tr>
+      <tr><td><div class="sk-name">Jetpack Compose</div></td><td><div class="sk-cat">UI Layer</div></td><td><div class="sk-bar-wrap"><div class="sk-bar"><div class="sk-fill" data-w="96"></div></div></div></td><td class="sk-pct">96%</td></tr>
+      <tr><td><div class="sk-name">MVVM / Clean Architecture</div></td><td><div class="sk-cat">Architecture</div></td><td><div class="sk-bar-wrap"><div class="sk-bar"><div class="sk-fill" data-w="95"></div></div></div></td><td class="sk-pct">95%</td></tr>
+      <tr><td><div class="sk-name">Firebase Suite</div></td><td><div class="sk-cat">Backend</div></td><td><div class="sk-bar-wrap"><div class="sk-bar"><div class="sk-fill" data-w="94"></div></div></div></td><td class="sk-pct">94%</td></tr>
+      <tr><td><div class="sk-name">GitHub Actions CI/CD</div></td><td><div class="sk-cat">DevOps</div></td><td><div class="sk-bar-wrap"><div class="sk-bar"><div class="sk-fill" data-w="92"></div></div></div></td><td class="sk-pct">92%</td></tr>
+      <tr><td><div class="sk-name">Ethical Hacking</div></td><td><div class="sk-cat">Security</div></td><td><div class="sk-bar-wrap"><div class="sk-bar"><div class="sk-fill" data-w="88"></div></div></div></td><td class="sk-pct">88%</td></tr>
+      <tr><td><div class="sk-name">ML Kit / TFLite</div></td><td><div class="sk-cat">AI / ML</div></td><td><div class="sk-bar-wrap"><div class="sk-bar"><div class="sk-fill" data-w="85"></div></div></div></td><td class="sk-pct">85%</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- WORK -->
+<section id="work" style="padding:5rem 4rem">
+  <div class="zen-divider" style="padding:0 0 3rem 0">
+    <div class="zd-line"></div>
+    <div class="zd-mark">作</div>
+    <div class="zd-line"></div>
+  </div>
+  <div class="work-grid">
+    <div class="work-card reveal">
+      <img src="https://picsum.photos/seed/zen1/600/450" class="wc-img" alt="MoekyawTranslator"/>
+      <div class="wc-body">
+        <div class="wc-cat">Flagship App</div>
+        <div class="wc-title">MoekyawTranslator</div>
+        <div class="wc-desc">Multilingual translation app with Claude API, TTS, and offline support for 8 languages including Myanmar.</div>
+        <div class="wc-tags"><span class="wc-tag">Kotlin</span><span class="wc-tag">Claude API</span><span class="wc-tag">Firebase</span></div>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <img src="https://picsum.photos/seed/zen2/600/450" class="wc-img" alt="PulseSync Azure"/>
+      <div class="wc-body">
+        <div class="wc-cat">Enterprise</div>
+        <div class="wc-title">PulseSync Azure</div>
+        <div class="wc-desc">Enterprise Android app with MSAL, Microsoft Graph, Azure OpenAI, Cosmos DB, and real-time SignalR.</div>
+        <div class="wc-tags"><span class="wc-tag">Azure</span><span class="wc-tag">MSAL</span><span class="wc-tag">OpenAI</span></div>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <img src="https://picsum.photos/seed/zen3/600/450" class="wc-img" alt="Design System"/>
+      <div class="wc-body">
+        <div class="wc-cat">Open Source</div>
+        <div class="wc-title">Compose Design System</div>
+        <div class="wc-desc">100+ reusable Jetpack Compose components with Material 3 theming and accessibility-first tokens.</div>
+        <div class="wc-tags"><span class="wc-tag">Compose</span><span class="wc-tag">Material 3</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:3rem">
+    <a href="https://github.com/Dev-moe-kyawaung" target="_blank" class="btn-zen-outline">View All on GitHub →</a>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="zen-quote reveal">
+  <div class="zq-text">"The best code is the code that never needs to be <em>explained</em> — it speaks for itself."</div>
+  <div class="zq-attr">— Moe Kyaw Aung · မိုးကျော်အောင် · Senior Android Developer</div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div style="font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--clay);margin-bottom:1rem">Contact / お問い合わせ</div>
+    <h2 class="contact-heading">Available for<br><em>New Projects</em></h2>
+    <p class="contact-p">Open to Android development projects, architecture consulting, security reviews, and AI/ML integrations. Based in Myanmar, available globally.</p>
+    <div class="c-info">
+      <div class="ci"><div class="ci-k">Email</div><div class="ci-v"><a href="mailto:moekyawaung@fastmail.com">moekyawaung@fastmail.com</a></div></div>
+      <div class="ci"><div class="ci-k">GitHub</div><div class="ci-v"><a href="https://github.com/Dev-moe-kyawaung" target="_blank">Dev-moe-kyawaung</a></div></div>
+      <div class="ci"><div class="ci-k">Location</div><div class="ci-v">Tachileik, Shan State, Myanmar 🇲🇲</div></div>
+      <div class="ci"><div class="ci-k">Company</div><div class="ci-v">Microsoft · Senior Android Developer</div></div>
+    </div>
+  </div>
+  <form class="zen-form reveal" onsubmit="cf(event)">
+    <div class="zf-group">
+      <label class="zf-label">Your Name</label>
+      <input type="text" class="zf-input" placeholder="Kyaw Zin Thant" required/>
+    </div>
+    <div class="zf-group">
+      <label class="zf-label">Email</label>
+      <input type="email" class="zf-input" placeholder="hello@example.com" required/>
+    </div>
+    <div class="zf-group">
+      <label class="zf-label">Message</label>
+      <textarea class="zf-input" rows="6" placeholder="Tell me about your project..." required style="resize:none"></textarea>
+    </div>
+    <button type="submit" class="btn-zen" style="align-self:flex-start;border:none;cursor:pointer">Send Message</button>
+    <div id="ok" style="display:none;font-size:.7rem;letter-spacing:.25em;color:var(--moss)">
+      ✓ Message received — reply within 24 hours
+    </div>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-jp">မိုးကျော်အောင်</div>
+  <div class="footer-info">© 2025 Moe Kyaw Aung · Portfolio V8 Zen · All Rights Reserved</div>
+  <div class="footer-socials">
+    <a href="https://github.com/Dev-moe-kyawaung" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/moe-kyaw-aung-2653093a1" target="_blank">LinkedIn</a>
+    <a href="https://bsky.app/profile/moekyawaung96.bsky.social" target="_blank">Bluesky</a>
+    <a href="https://tiktok.com/@moelay262411" target="_blank">TikTok</a>
+  </div>
+</footer>
+
+<button id="btt" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const obs=new IntersectionObserver(e=>e.forEach(en=>{
+  if(en.isIntersecting){
+    en.target.classList.add('in');
+    en.target.querySelectorAll('.sk-fill').forEach(b=>b.style.width=b.dataset.w+'%');
+  }
+}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+addEventListener('scroll',()=>document.getElementById('btt').classList.toggle('show',scrollY>400));
+function cf(e){
+  e.preventDefault();
+  document.getElementById('ok').style.display='block';
+  e.target.reset();
+  setTimeout(()=>document.getElementById('ok').style.display='none',5000);
+}
+</script>
+</body>
+</html>
