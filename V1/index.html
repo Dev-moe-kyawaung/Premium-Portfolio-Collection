@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Moe Kyaw Aung — Senior Android Developer. Obsidian Brutalist Portfolio."/>
+<title>MKA · OBSIDIAN BRUTALIST</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;700;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#030303;
+  --coal:#0d0d0d;
+  --iron:#1a1a1a;
+  --zinc:#2e2e2e;
+  --bone:#e8e0d0;
+  --rust:#c0392b;
+  --lime:#adff2f;
+  --gold:#f0c040;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--void);color:var(--bone);font-family:'Space Mono',monospace;overflow-x:hidden;cursor:crosshair}
+
+/* SCANLINES OVERLAY */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.06) 2px,rgba(0,0,0,0.06) 4px);
+  pointer-events:none;z-index:9999;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:stretch;
+  border-bottom:3px solid var(--rust);
+  background:var(--void);
+}
+.nav-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:3rem;line-height:1;
+  color:var(--rust);
+  padding:0.5rem 1.5rem;
+  border-right:3px solid var(--rust);
+  letter-spacing:-0.02em;
+}
+.nav-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.8rem;letter-spacing:0.15em;
+  color:var(--bone);
+  padding:0 2rem;
+  display:flex;align-items:center;
+  flex:1;
+}
+.nav-links{
+  display:flex;list-style:none;border-left:3px solid var(--rust);
+}
+.nav-links li{border-right:1px solid var(--zinc)}
+.nav-links a{
+  display:flex;align-items:center;
+  padding:0 1.5rem;
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--bone);
+  text-decoration:none;height:100%;
+  transition:background 0.2s,color 0.2s;
+}
+.nav-links a:hover{background:var(--rust);color:var(--void)}
+
+/* HERO */
+#hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-top:80px solid transparent;
+}
+.hero-left{
+  border-right:3px solid var(--rust);
+  padding:4rem 3rem;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.hero-left::after{
+  content:'#01';
+  position:absolute;right:-0.5rem;bottom:2rem;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12rem;color:var(--iron);line-height:1;
+  pointer-events:none;
+}
+.hero-eyebrow{
+  font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:1.5rem;
+}
+.hero-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4rem,9vw,8rem);
+  line-height:0.92;letter-spacing:-0.01em;
+  color:var(--bone);margin-bottom:2rem;
+}
+.hero-name span{color:var(--rust)}
+.hero-role{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.1rem;font-weight:300;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:3rem;
+  border-left:4px solid var(--gold);padding-left:1rem;
+}
+.hero-desc{
+  font-size:0.82rem;line-height:1.9;
+  color:rgba(232,224,208,0.65);
+  max-width:420px;margin-bottom:3rem;
+}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  font-family:'Space Mono',monospace;
+  font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;
+  padding:1rem 2rem;
+  background:var(--rust);color:var(--void);
+  border:none;text-decoration:none;
+  display:inline-block;
+  transition:transform 0.15s;
+  font-weight:700;
+}
+.btn-primary:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--bone)}
+.btn-ghost{
+  font-family:'Space Mono',monospace;
+  font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;
+  padding:1rem 2rem;
+  border:2px solid var(--bone);color:var(--bone);
+  text-decoration:none;display:inline-block;
+  transition:transform 0.15s,background 0.15s;
+}
+.btn-ghost:hover{background:var(--bone);color:var(--void);transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--rust)}
+.hero-right{
+  display:flex;flex-direction:column;
+}
+.hero-img-block{
+  flex:1;border-bottom:3px solid var(--rust);
+  position:relative;overflow:hidden;
+}
+.hero-img-block img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(100%) contrast(1.2);
+  mix-blend-mode:luminosity;opacity:0.7;
+}
+.hero-img-block::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(192,57,43,0.05) 10px,rgba(192,57,43,0.05) 20px);
+}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+}
+.stat-block{
+  padding:1.5rem 1rem;text-align:center;
+  border-right:1px solid var(--zinc);
+}
+.stat-block:last-child{border-right:none}
+.stat-n{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:3rem;color:var(--lime);line-height:1;
+}
+.stat-l{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(232,224,208,0.4);margin-top:0.25rem}
+
+/* MARQUEE */
+.marquee-bar{
+  border-top:3px solid var(--rust);
+  border-bottom:3px solid var(--rust);
+  background:var(--rust);
+  overflow:hidden;padding:0.6rem 0;
+}
+.marquee-inner{
+  display:flex;gap:3rem;
+  animation:marquee 20s linear infinite;
+  white-space:nowrap;
+}
+.marquee-inner span{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem;letter-spacing:0.2em;
+  color:var(--void);
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SKILLS SECTION */
+#skills{padding:5rem 0;border-bottom:3px solid var(--rust)}
+.section-header{
+  display:grid;grid-template-columns:auto 1fr;
+  align-items:center;gap:2rem;
+  padding:0 3rem;margin-bottom:3rem;
+  border-bottom:1px solid var(--zinc);padding-bottom:1.5rem;
+}
+.section-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:5rem;color:var(--iron);line-height:1;
+}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.5rem,5vw,4rem);
+  letter-spacing:0.05em;color:var(--bone);
+}
+.skills-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--zinc);
+}
+.skill-row{
+  padding:2rem 3rem;
+  border-right:1px solid var(--zinc);
+  border-bottom:1px solid var(--zinc);
+  position:relative;
+}
+.skill-row:nth-child(3n){border-right:none}
+.skill-tag{
+  font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:0.5rem;
+}
+.skill-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.4rem;font-weight:700;
+  letter-spacing:0.05em;color:var(--bone);
+  margin-bottom:1rem;
+}
+.skill-bar{height:3px;background:var(--zinc);margin-bottom:0.5rem;position:relative}
+.skill-fill{
+  height:100%;background:var(--lime);
+  width:0;transition:width 1.5s ease;
+}
+.skill-pct{
+  font-size:0.7rem;color:var(--gold);
+  font-family:'Space Mono',monospace;
+}
+
+/* PROJECTS */
+#projects{border-bottom:3px solid var(--rust)}
+.projects-grid{display:grid;grid-template-columns:1fr 1fr}
+.project-item{
+  border-right:1px solid var(--zinc);
+  border-bottom:1px solid var(--zinc);
+  padding:2.5rem 3rem;
+  position:relative;
+  cursor:crosshair;
+  transition:background 0.2s;
+  overflow:hidden;
+}
+.project-item:nth-child(2n){border-right:none}
+.project-item:hover{background:var(--iron)}
+.project-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:0.9rem;letter-spacing:0.3em;
+  color:var(--rust);margin-bottom:1rem;
+}
+.project-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.5rem;color:var(--bone);
+  letter-spacing:0.02em;line-height:1;
+  margin-bottom:0.75rem;
+}
+.project-desc{
+  font-size:0.78rem;line-height:1.8;
+  color:rgba(232,224,208,0.55);margin-bottom:1.25rem;
+}
+.project-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
+.chip{
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;letter-spacing:0.15em;
+  padding:0.3rem 0.7rem;
+  border:1px solid var(--zinc);color:var(--bone);
+}
+.project-item:hover .chip{border-color:var(--rust);color:var(--rust)}
+.project-arrow{
+  position:absolute;top:2rem;right:2.5rem;
+  font-size:2rem;color:var(--zinc);
+  transition:color 0.2s,transform 0.2s;
+}
+.project-item:hover .project-arrow{color:var(--lime);transform:translate(4px,-4px)}
+
+/* CONTACT */
+#contact{padding:5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;border-bottom:3px solid var(--rust)}
+.contact-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,6vw,5rem);
+  line-height:0.9;color:var(--bone);
+  margin-bottom:2rem;
+}
+.contact-label span{color:var(--rust)}
+.info-row{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:1rem 0;border-bottom:1px solid var(--zinc);
+}
+.info-row:last-child{border-bottom:none}
+.info-key{
+  font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--rust);min-width:80px;padding-top:0.2rem;
+}
+.info-val{font-size:0.85rem;color:var(--bone)}
+.info-val a{color:var(--lime);text-decoration:none}
+.info-val a:hover{text-decoration:underline}
+
+form{display:flex;flex-direction:column;gap:1.25rem}
+label{font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--rust)}
+input,textarea{
+  background:var(--iron);border:2px solid var(--zinc);
+  color:var(--bone);font-family:'Space Mono',monospace;
+  font-size:0.82rem;padding:0.85rem;
+  outline:none;resize:none;
+  transition:border-color 0.2s;
+}
+input:focus,textarea:focus{border-color:var(--rust)}
+input::placeholder,textarea::placeholder{color:rgba(232,224,208,0.3)}
+
+/* FOOTER */
+footer{
+  padding:2rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:3px solid var(--rust);
+  flex-wrap:wrap;gap:1rem;
+}
+.footer-mark{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;color:var(--rust);letter-spacing:0.1em;
+}
+.footer-info{
+  font-size:0.65rem;letter-spacing:0.15em;
+  text-transform:uppercase;color:rgba(232,224,208,0.35);
+}
+.social-row{display:flex;gap:0}
+.social-row a{
+  display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;
+  border:1px solid var(--zinc);
+  color:var(--bone);text-decoration:none;
+  font-size:0.85rem;
+  transition:background 0.2s,color 0.2s;
+}
+.social-row a:hover{background:var(--rust);color:var(--void);border-color:var(--rust)}
+
+/* BACK TOP */
+#btt{
+  position:fixed;bottom:2rem;right:2rem;
+  width:44px;height:44px;
+  background:var(--rust);color:var(--void);
+  border:none;font-size:1.2rem;
+  cursor:crosshair;
+  opacity:0;transform:translateY(10px);
+  transition:opacity 0.3s,transform 0.3s;
+  display:flex;align-items:center;justify-content:center;
+}
+#btt.show{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .project-item:nth-child(2n){border-right:1px solid var(--zinc)}
+  #contact{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@media(max-width:600px){
+  .skills-grid{grid-template-columns:1fr}
+  .skill-row{border-right:none}
+  .hero-left{padding:2rem 1.5rem}
+  #contact{padding:3rem 1.5rem}
+  footer{padding:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-num">MKA</div>
+  <div class="nav-title">PORTFOLIO · V8 · OBSIDIAN</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://github.com/Dev-moe-kyawaung" target="_blank">GitHub ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">// Senior Android Developer · Microsoft · Tachileik, Myanmar 🇲🇲</div>
+    <h1 class="hero-name">MOE<br>KYAW<br><span>AUNG.</span></h1>
+    <p class="hero-role">Android Engineer · Kotlin · Jetpack Compose</p>
+    <p class="hero-desc">
+      Nearly 12 years engineering secure, scalable mobile applications.
+      From clean architecture blueprints to Play Store release — I own every layer.
+      မိုးကျော်အောင် · Building what matters.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Work →</a>
+      <a href="#contact" class="btn-ghost">Hire Me</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-block">
+      <img src="https://0.gravatar.com/avatar/a2dae9a29fbf7c72552047efc744be54a018938aacd9009e7500f93d72eb0f2e?size=600" alt="Moe Kyaw Aung"/>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-block">
+        <div class="stat-n">12+</div>
+        <div class="stat-l">Years</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-n">48+</div>
+        <div class="stat-l">Apps</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-n">35+</div>
+        <div class="stat-l">Certs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span>KOTLIN</span><span>·</span><span>JETPACK COMPOSE</span><span>·</span>
+    <span>CLEAN ARCHITECTURE</span><span>·</span><span>FIREBASE</span><span>·</span>
+    <span>MVVM</span><span>·</span><span>CI/CD</span><span>·</span>
+    <span>ETHICAL HACKING</span><span>·</span><span>ML KIT</span><span>·</span>
+    <span>ROOM DB</span><span>·</span><span>HILT/DAGGER</span><span>·</span>
+    <!-- duplicate for seamless loop -->
+    <span>KOTLIN</span><span>·</span><span>JETPACK COMPOSE</span><span>·</span>
+    <span>CLEAN ARCHITECTURE</span><span>·</span><span>FIREBASE</span><span>·</span>
+    <span>MVVM</span><span>·</span><span>CI/CD</span><span>·</span>
+    <span>ETHICAL HACKING</span><span>·</span><span>ML KIT</span><span>·</span>
+    <span>ROOM DB</span><span>·</span><span>HILT/DAGGER</span><span>·</span>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <h2 class="section-title">CORE SKILLS &amp;<br>EXPERTISE</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-row">
+      <div class="skill-tag">// Android</div>
+      <div class="skill-name">Kotlin / Java</div>
+      <div class="skill-bar"><div class="skill-fill" data-w="98"></div></div>
+      <div class="skill-pct">98%</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-tag">// UI Layer</div>
+      <div class="skill-name">Jetpack Compose</div>
+      <div class="skill-bar"><div class="skill-fill" data-w="96"></div></div>
+      <div class="skill-pct">96%</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-tag">// Architecture</div>
+      <div class="skill-name">MVVM / Clean Arch</div>
+      <div class="skill-bar"><div class="skill-fill" data-w="95"></div></div>
+      <div class="skill-pct">95%</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-tag">// Backend</div>
+      <div class="skill-name">Firebase Suite</div>
+      <div class="skill-bar"><div class="skill-fill" data-w="94"></div></div>
+      <div class="skill-pct">94%</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-tag">// Security</div>
+      <div class="skill-name">Ethical Hacking</div>
+      <div class="skill-bar"><div class="skill-fill" data-w="88"></div></div>
+      <div class="skill-pct">88%</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-tag">// DevOps</div>
+      <div class="skill-name">GitHub Actions CI/CD</div>
+      <div class="skill-bar"><div class="skill-fill" data-w="92"></div></div>
+      <div class="skill-pct">92%</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <h2 class="section-title">SELECTED<br>WORK</h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project-item">
+      <div class="project-num">// 001</div>
+      <div class="project-title">MOEKYAW TRANSLATOR</div>
+      <div class="project-desc">Flagship multilingual Android app powered by Claude API. Supports 8 languages including Myanmar, with offline TTS, MVVM architecture, and Firebase sync.</div>
+      <div class="project-chips">
+        <span class="chip">Kotlin</span><span class="chip">Jetpack Compose</span><span class="chip">Claude API</span><span class="chip">Firebase</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+    <div class="project-item">
+      <div class="project-num">// 002</div>
+      <div class="project-title">CI/CD SUITE</div>
+      <div class="project-desc">5 production GitHub Actions workflows — lint, unit tests, instrumented tests, release signing, and dependency audits. Cuts release cycle from hours to minutes.</div>
+      <div class="project-chips">
+        <span class="chip">GitHub Actions</span><span class="chip">YAML</span><span class="chip">Fastlane</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+    <div class="project-item">
+      <div class="project-num">// 003</div>
+      <div class="project-title">COMPOSE DESIGN SYSTEM</div>
+      <div class="project-desc">100+ reusable Jetpack Compose components with Material 3 theming, dark/light mode, custom typography, and accessibility-first design tokens.</div>
+      <div class="project-chips">
+        <span class="chip">Compose</span><span class="chip">Material 3</span><span class="chip">Kotlin</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+    <div class="project-item">
+      <div class="project-num">// 004</div>
+      <div class="project-title">THAILAND RESOURCES HUB</div>
+      <div class="project-desc">Bilingual community app for Myanmar nationals in Thailand. Legal resources, healthcare info, emergency contacts — offline-first with Room DB and periodic Firebase sync.</div>
+      <div class="project-chips">
+        <span class="chip">Room DB</span><span class="chip">Retrofit</span><span class="chip">Hilt</span><span class="chip">Bilingual</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+    <div class="project-item">
+      <div class="project-num">// 005</div>
+      <div class="project-title">ACODE DEVX PLUGIN</div>
+      <div class="project-desc">Published Acode editor plugin (v2.0.42) with 13 custom syntax themes. Over 1,200 active installs. Pure JavaScript plugin architecture for the mobile IDE.</div>
+      <div class="project-chips">
+        <span class="chip">JavaScript</span><span class="chip">CSS</span><span class="chip">Plugin API</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+    <div class="project-item">
+      <div class="project-num">// 006</div>
+      <div class="project-title">PULSESYNC AZURE</div>
+      <div class="project-desc">Enterprise Android app with MSAL authentication, Microsoft Graph API, Azure OpenAI chat, Cosmos DB persistence, and real-time SignalR messaging.</div>
+      <div class="project-chips">
+        <span class="chip">Azure</span><span class="chip">MSAL</span><span class="chip">OpenAI</span><span class="chip">SignalR</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div>
+    <div class="contact-label">LET'S<br>BUILD<br><span>TOGETHER.</span></div>
+    <div class="info-row">
+      <span class="info-key">EMAIL</span>
+      <span class="info-val"><a href="mailto:moekyawaung@fastmail.com">moekyawaung@fastmail.com</a></span>
+    </div>
+    <div class="info-row">
+      <span class="info-key">LOCATION</span>
+      <span class="info-val">Tachileik, Myanmar 🇲🇲</span>
+    </div>
+    <div class="info-row">
+      <span class="info-key">GITHUB</span>
+      <span class="info-val"><a href="https://github.com/Dev-moe-kyawaung" target="_blank">Dev-moe-kyawaung</a></span>
+    </div>
+    <div class="info-row">
+      <span class="info-key">ROLE</span>
+      <span class="info-val">Senior Android Developer · Microsoft</span>
+    </div>
+  </div>
+  <form onsubmit="handleForm(event)">
+    <div>
+      <label>Your Name</label>
+      <input type="text" placeholder="Kyaw Zin Thant" required/>
+    </div>
+    <div>
+      <label>Email</label>
+      <input type="email" placeholder="hello@example.com" required/>
+    </div>
+    <div>
+      <label>Message</label>
+      <textarea rows="5" placeholder="Tell me about your project..." required></textarea>
+    </div>
+    <button type="submit" class="btn-primary" style="width:100%;text-align:center">SEND MESSAGE →</button>
+    <div id="fs" style="display:none;color:var(--lime);font-size:0.72rem;letter-spacing:0.2em;margin-top:0.5rem">// MESSAGE SENT. I'll reply within 24 hours.</div>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-mark">MKA · 2025</div>
+  <div class="footer-info">မိုးကျော်အောင် · TACHILEIK, MYANMAR · PORTFOLIO V8 OBSIDIAN</div>
+  <div class="social-row">
+    <a href="https://github.com/Dev-moe-kyawaung" target="_blank" title="GitHub">GH</a>
+    <a href="https://www.linkedin.com/in/moe-kyaw-aung-2653093a1" target="_blank" title="LinkedIn">LI</a>
+    <a href="https://bsky.app/profile/moekyawaung96.bsky.social" target="_blank" title="Bluesky">BS</a>
+    <a href="https://tiktok.com/@moelay262411" target="_blank" title="TikTok">TK</a>
+  </div>
+</footer>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+<script>
+// Skill bars
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.skill-fill').forEach(b=>{
+        b.style.width=b.dataset.w+'%';
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('#skills').forEach(s=>io.observe(s));
+
+// Back to top
+window.addEventListener('scroll',()=>{
+  document.getElementById('btt').classList.toggle('show',scrollY>500);
+});
+
+// Form
+function handleForm(e){
+  e.preventDefault();
+  document.getElementById('fs').style.display='block';
+  e.target.reset();
+  setTimeout(()=>document.getElementById('fs').style.display='none',6000);
+}
+</script>
+</body>
+</html>
