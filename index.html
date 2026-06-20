@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Moe Kyaw Aung — Premium Portfolio Collection Index. 7 premium themes."/>
+<title>MKA · Portfolio Collection Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#07070f;color:#f0eeff;
+  font-family:'Space Grotesk',sans-serif;
+  min-height:100vh;padding:3rem 2rem;
+}
+.container{max-width:1000px;margin:0 auto}
+header{text-align:center;margin-bottom:4rem}
+.avatar{
+  width:80px;height:80px;border-radius:50%;
+  border:2px solid rgba(167,139,250,0.5);
+  margin:0 auto 1.5rem;display:block;
+  object-fit:cover;
+}
+h1{
+  font-size:1.8rem;font-weight:700;letter-spacing:-0.02em;
+  background:linear-gradient(135deg,#a78bfa,#38bdf8,#34d399);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:0.4rem;
+}
+.sub{font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(240,238,255,0.4);margin-bottom:0.5rem}
+.mm{font-size:1rem;color:rgba(167,139,250,0.7);letter-spacing:0.1em}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1rem;
+}
+.card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:16px;padding:1.75rem;
+  text-decoration:none;color:inherit;
+  display:block;
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  border-radius:16px 16px 0 0;
+  opacity:0;transition:opacity .3s;
+}
+.card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.15);box-shadow:0 16px 48px rgba(0,0,0,0.4)}
+.card:hover::before{opacity:1}
+.c1::before{background:#c0392b}
+.c2::before{background:linear-gradient(90deg,#00d4aa,#7b2fff)}
+.c3::before{background:linear-gradient(90deg,#00ffee,#ff0080)}
+.c4::before{background:linear-gradient(90deg,#b08a6e,#5c7a5a)}
+.c5::before{background:linear-gradient(90deg,#c9941a,#f5d98a)}
+.c6::before{background:linear-gradient(90deg,#ff6eb4,#a78bfa,#38bdf8)}
+.c7::before{background:linear-gradient(90deg,#c8a84b,#e8cc7a)}
+.card-num{
+  font-family:'DM Mono',monospace;font-size:0.62rem;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(240,238,255,0.3);margin-bottom:0.75rem;
+}
+.card-title{font-size:1.05rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:0.3rem}
+.card-style{font-size:0.72rem;color:rgba(240,238,255,0.45);margin-bottom:1rem}
+.card-desc{font-size:0.75rem;line-height:1.65;color:rgba(240,238,255,0.35)}
+.card-arrow{
+  position:absolute;top:1.5rem;right:1.5rem;
+  font-size:0.9rem;color:rgba(240,238,255,0.2);
+  transition:color .3s,transform .3s;
+}
+.card:hover .card-arrow{color:rgba(240,238,255,0.8);transform:translate(3px,-3px)}
+.palette{display:flex;gap:0.35rem;margin-top:1rem;flex-wrap:wrap}
+.dot{width:12px;height:12px;border-radius:50%}
+footer{
+  margin-top:4rem;text-align:center;
+  font-family:'DM Mono',monospace;font-size:0.65rem;
+  letter-spacing:0.15em;color:rgba(240,238,255,0.2);
+}
+footer a{color:rgba(167,139,250,0.6);text-decoration:none}
+footer a:hover{color:#a78bfa}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <img src="https://0.gravatar.com/avatar/a2dae9a29fbf7c72552047efc744be54a018938aacd9009e7500f93d72eb0f2e?size=160" class="avatar" alt="Moe Kyaw Aung"/>
+    <h1>Premium Portfolio Collection</h1>
+    <div class="sub">Moe Kyaw Aung · Senior Android Developer · Microsoft</div>
+    <div class="mm">မိုးကျော်အောင် · Tachileik, Myanmar 🇲🇲</div>
+  </header>
+
+  <div class="grid">
+    <a href="./V8/index.html" class="card c6">
+      <div class="card-num">// V8</div>
+      <div class="card-title">Glassmorphism</div>
+      <div class="card-style">Frosted Glass · Dark Charcoal</div>
+      <div class="card-desc">Particle canvas hero, pricing table, FAQ accordion, preloader, testimonials.</div>
+      <div class="palette">
+        <div class="dot" style="background:#222831"></div>
+        <div class="dot" style="background:#393E46"></div>
+        <div class="dot" style="background:#948979"></div>
+        <div class="dot" style="background:#DFD0B8"></div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <a href="./v1/index.html" class="card c1">
+      <div class="card-num">// V1</div>
+      <div class="card-title">Obsidian Brutalist</div>
+      <div class="card-style">Raw Editorial · Bold Grid · CRT Scanlines</div>
+      <div class="card-desc">Terminal hero window, rust red accents, electric lime skill bars, bold section numbers.</div>
+      <div class="palette">
+        <div class="dot" style="background:#030303"></div>
+        <div class="dot" style="background:#c0392b"></div>
+        <div class="dot" style="background:#adff2f"></div>
+        <div class="dot" style="background:#f0c040"></div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <a href="./v2/index.html" class="card c2">
+      <div class="card-num">// V2</div>
+      <div class="card-title">Aurora Luxury</div>
+      <div class="card-style">Deep Space · Frosted Glass · Luxury</div>
+      <div class="card-desc">Live aurora canvas animation, spinning conic-gradient avatar ring, Cormorant Garamond typography.</div>
+      <div class="palette">
+        <div class="dot" style="background:#040810"></div>
+        <div class="dot" style="background:#00d4aa"></div>
+        <div class="dot" style="background:#7b2fff"></div>
+        <div class="dot" style="background:#c9a84c"></div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <a href="./v3/index.html" class="card c3">
+      <div class="card-num">// V3</div>
+      <div class="card-title">Cyberpunk Matrix</div>
+      <div class="card-style">Neon · Myanmar Matrix Rain · Hacker</div>
+      <div class="card-desc">Myanmar + Katakana matrix rain canvas, typing animation, terminal session hero, clip-path angular UI.</div>
+      <div class="palette">
+        <div class="dot" style="background:#000308"></div>
+        <div class="dot" style="background:#00ffee"></div>
+        <div class="dot" style="background:#ff0080"></div>
+        <div class="dot" style="background:#ffe600"></div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <a href="./v4/index.html" class="card c4">
+      <div class="card-num">// V4</div>
+      <div class="card-title">Japandi Zen</div>
+      <div class="card-style">Wabi-Sabi · Light Theme · Minimalist</div>
+      <div class="card-desc">Rice paper background, kanji watermarks, sepia photography, skills table, washi noise texture.</div>
+      <div class="palette">
+        <div class="dot" style="background:#f5f0e8"></div>
+        <div class="dot" style="background:#b08a6e"></div>
+        <div class="dot" style="background:#9c5e3e"></div>
+        <div class="dot" style="background:#1c1814"></div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <a href="./v5/index.html" class="card c5">
+      <div class="card-num">// V5</div>
+      <div class="card-title">Royal Velvet Gold</div>
+      <div class="card-style">Dark Purple · Animated Gold Foil · Regal</div>
+      <div class="card-desc">Animated gold shimmer on all accents, velvet purple backgrounds, ornate clip-path buttons, Roman numeral headers.</div>
+      <div class="palette">
+        <div class="dot" style="background:#0e0812"></div>
+        <div class="dot" style="background:#2d1b42"></div>
+        <div class="dot" style="background:#c9941a"></div>
+        <div class="dot" style="background:#f5d98a"></div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <a href="./v6/index.html" class="card c6">
+      <div class="card-num">// V6</div>
+      <div class="card-title">Holographic</div>
+      <div class="card-style">Iridescent Rainbow · Glassmorphism</div>
+      <div class="card-desc">Full holo gradient system, floating orb ambience, testimonials section, iridescent avatar ring glow.</div>
+      <div class="palette">
+        <div class="dot" style="background:#08070f"></div>
+        <div class="dot" style="background:#ff6eb4"></div>
+        <div class="dot" style="background:#a78bfa"></div>
+        <div class="dot" style="background:#38bdf8"></div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <a href="./v7/index.html" class="card c7">
+      <div class="card-num">// V7</div>
+      <div class="card-title">Bagan Midnight</div>
+      <div class="card-style">Myanmar Cultural · Starfield · Pagoda SVG</div>
+      <div class="card-desc">Hand-drawn Bagan SVG skyline, twinkling starfield canvas, full bilingual Burmese UI, Myanmar gold palette.</div>
+      <div class="palette">
+        <div class="dot" style="background:#06090e"></div>
+        <div class="dot" style="background:#0d1b2e"></div>
+        <div class="dot" style="background:#c8a84b"></div>
+        <div class="dot" style="background:#f0e8d0"></div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+  </div>
+
+  <footer>
+    <p>
+      © 2025 <a href="https://github.com/Dev-moe-kyawaung" target="_blank">Moe Kyaw Aung</a>
+      · မိုးကျော်အောင် · Senior Android Developer · Microsoft
+      · Tachileik, Myanmar 🇲🇲
+    </p>
+    <p style="margin-top:.5rem">
+      <a href="https://github.com/Dev-moe-kyawaung" target="_blank">GitHub</a>
+      · <a href="https://www.linkedin.com/in/moe-kyaw-aung-2653093a1" target="_blank">LinkedIn</a>
+      · <a href="https://gravatar.com/moekyawaung2026" target="_blank">Gravatar</a>
+    </p>
+  </footer>
+</div>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</html>
