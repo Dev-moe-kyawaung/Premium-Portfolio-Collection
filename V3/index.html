@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Moe Kyaw Aung — Senior Android Developer. Neon Cyberpunk Portfolio."/>
+<title>MKA · CYBER_PUNK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;700;900&family=Exo+2:ital,wght@0,200;0,300;0,400;0,700;1,200&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#000308;
+  --dark:#010a0d;
+  --panel:#071015;
+  --cyan:#00ffee;
+  --pink:#ff0080;
+  --yellow:#ffe600;
+  --green:#00ff41;
+  --dim-cyan:rgba(0,255,238,0.6);
+  --dim-pink:rgba(255,0,128,0.6);
+  --white:#e8f4f8;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);
+  color:var(--white);
+  font-family:'Share Tech Mono',monospace;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* MATRIX RAIN */
+#matrix{position:fixed;inset:0;z-index:0;opacity:0.07;pointer-events:none}
+
+/* SCANLINES */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,255,238,0.012) 3px,rgba(0,255,238,0.012) 4px);
+}
+/* VIGNETTE */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9989;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 40%,rgba(0,3,8,0.8) 100%);
+}
+
+/* CURSOR */
+#cur{
+  position:fixed;width:4px;height:20px;
+  background:var(--cyan);box-shadow:0 0 10px var(--cyan);
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  animation:blink .8s step-end infinite;
+}
+@keyframes blink{50%{opacity:0}}
+#cur2{
+  position:fixed;width:28px;height:28px;
+  border:1px solid var(--cyan);
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%);
+  transition:transform .06s;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.9rem 3rem;
+  border-bottom:1px solid rgba(0,255,238,0.15);
+  background:rgba(0,3,8,0.92);
+  backdrop-filter:blur(10px);
+}
+.nav-logo{
+  font-family:'Orbitron',monospace;font-size:1rem;font-weight:900;
+  color:var(--cyan);letter-spacing:0.2em;text-decoration:none;
+  text-shadow:0 0 10px var(--cyan),0 0 20px var(--cyan);
+}
+.nav-links{list-style:none;display:flex;gap:2rem}
+.nav-links a{
+  font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(232,244,248,0.5);text-decoration:none;
+  transition:color .2s,text-shadow .2s;
+}
+.nav-links a:hover{color:var(--cyan);text-shadow:0 0 8px var(--cyan)}
+.nav-status{
+  font-size:0.6rem;letter-spacing:0.2em;
+  color:var(--green);
+}
+.nav-status::before{
+  content:'●';margin-right:0.5rem;
+  animation:pulse-g 2s infinite;
+}
+@keyframes pulse-g{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* TERMINAL HERO */
+#hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:6rem 3rem 3rem;
+  gap:4rem;
+}
+.hero-terminal{
+  flex:1;max-width:640px;
+}
+.terminal-win{
+  border:1px solid rgba(0,255,238,0.3);
+  background:rgba(7,16,21,0.9);
+  backdrop-filter:blur(12px);
+  box-shadow:0 0 40px rgba(0,255,238,0.08),inset 0 0 40px rgba(0,3,8,0.5);
+}
+.terminal-bar{
+  padding:0.6rem 1rem;
+  border-bottom:1px solid rgba(0,255,238,0.15);
+  display:flex;align-items:center;gap:0.6rem;
+  background:rgba(0,3,8,0.5);
+}
+.t-dot{width:10px;height:10px;border-radius:50%}
+.t-dot:nth-child(1){background:#ff5f57}
+.t-dot:nth-child(2){background:#febc2e}
+.t-dot:nth-child(3){background:#28c840}
+.t-title{
+  font-size:0.65rem;letter-spacing:0.2em;
+  color:rgba(232,244,248,0.3);margin-left:0.5rem;
+}
+.terminal-body{padding:1.75rem 2rem}
+.t-line{
+  font-size:0.82rem;line-height:1.9;
+  margin-bottom:0.2rem;
+}
+.t-prompt{color:var(--cyan)}
+.t-cmd{color:var(--white)}
+.t-out{color:rgba(232,244,248,0.55);padding-left:1rem}
+.t-key{color:var(--pink)}
+.t-val{color:var(--yellow)}
+.t-comment{color:rgba(232,244,248,0.25)}
+.t-success{color:var(--green)}
+.t-cursor-line{display:flex;align-items:center;gap:0.3rem;margin-top:0.5rem}
+.t-blink{
+  display:inline-block;width:8px;height:14px;
+  background:var(--cyan);animation:blink .8s step-end infinite;
+}
+
+/* HERO RIGHT */
+.hero-profile{
+  display:flex;flex-direction:column;align-items:center;gap:2rem;
+  flex-shrink:0;
+}
+.cyber-avatar{
+  position:relative;width:220px;height:220px;
+}
+.cyber-ring1,.cyber-ring2,.cyber-ring3{
+  position:absolute;border-radius:50%;
+  border:1px solid var(--cyan);
+  animation:spin-r1 6s linear infinite;
+}
+.cyber-ring1{inset:-20px;border-style:dashed;opacity:0.4;animation-duration:6s}
+.cyber-ring2{inset:-8px;border-color:var(--pink);opacity:0.5;animation-duration:4s;animation-direction:reverse}
+.cyber-ring3{inset:2px;border-color:rgba(0,255,238,0.3);animation-duration:8s;border-style:dotted}
+@keyframes spin-r1{to{transform:rotate(360deg)}}
+.cyber-img-wrap{
+  position:absolute;inset:0;border-radius:50%;overflow:hidden;
+  border:2px solid var(--cyan);
+  box-shadow:0 0 20px rgba(0,255,238,0.4),0 0 60px rgba(0,255,238,0.15);
+}
+.cyber-img-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(0.3)contrast(1.3)brightness(0.9);
+  mix-blend-mode:normal;
+}
+.cyber-img-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 50%,rgba(0,255,238,0.2) 100%);
+}
+/* Scan effect */
+.cyber-scan{
+  position:absolute;inset:0;border-radius:50%;overflow:hidden;pointer-events:none;
+}
+.cyber-scan::after{
+  content:'';position:absolute;
+  left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  box-shadow:0 0 8px var(--cyan);
+  animation:scan 3s linear infinite;
+}
+@keyframes scan{
+  0%{top:-2px;opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{top:100%;opacity:0}
+}
+.cyber-name{
+  font-family:'Orbitron',monospace;font-weight:900;
+  font-size:1.6rem;letter-spacing:0.08em;
+  color:var(--cyan);text-align:center;
+  text-shadow:0 0 15px var(--cyan),0 0 30px var(--cyan);
+}
+.cyber-sub{
+  font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--pink);text-align:center;
+  text-shadow:0 0 10px var(--pink);
+}
+.cyber-mm{
+  font-size:0.75rem;color:rgba(232,244,248,0.4);
+  text-align:center;letter-spacing:0.1em;
+}
+.cyber-btns{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center}
+.btn-cyber{
+  font-family:'Orbitron',monospace;
+  font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;
+  padding:0.7rem 1.4rem;text-decoration:none;
+  border:1px solid var(--cyan);color:var(--cyan);
+  position:relative;overflow:hidden;
+  transition:color .2s;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+}
+.btn-cyber::before{
+  content:'';position:absolute;inset:0;
+  background:var(--cyan);transform:translateX(-100%);
+  transition:transform .3s;
+}
+.btn-cyber:hover::before{transform:translateX(0)}
+.btn-cyber:hover{color:var(--void)}
+.btn-cyber span{position:relative;z-index:1}
+.btn-cyber-pink{
+  border-color:var(--pink);color:var(--pink);
+}
+.btn-cyber-pink::before{background:var(--pink)}
+.btn-cyber-pink:hover{color:var(--void)}
+
+/* SECTION HEADER */
+.cyber-section-head{
+  padding:0 3rem;margin-bottom:3rem;
+  display:flex;align-items:center;gap:1.5rem;
+}
+.csh-num{
+  font-family:'Orbitron',monospace;font-size:0.7rem;
+  color:var(--pink);letter-spacing:0.2em;
+}
+.csh-title{
+  font-family:'Orbitron',monospace;font-size:clamp(1.2rem,3vw,2rem);
+  font-weight:700;color:var(--white);letter-spacing:0.1em;
+}
+.csh-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(0,255,238,0.4),transparent)}
+
+/* SKILLS */
+#skills{position:relative;z-index:1;padding:5rem 0}
+.skills-hex-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;padding:0 3rem;
+}
+.hex-card{
+  background:var(--panel);
+  border:1px solid rgba(0,255,238,0.1);
+  padding:2rem;position:relative;overflow:hidden;
+  transition:border-color .3s,background .3s;
+  cursor:none;
+}
+.hex-card::before{
+  content:'';position:absolute;top:0;left:0;
+  width:3px;height:0;
+  background:linear-gradient(180deg,var(--cyan),var(--pink));
+  transition:height .4s;
+}
+.hex-card:hover{
+  border-color:rgba(0,255,238,0.35);
+  background:rgba(0,255,238,0.03);
+}
+.hex-card:hover::before{height:100%}
+.hc-tag{
+  font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--pink);margin-bottom:0.75rem;
+}
+.hc-title{
+  font-family:'Orbitron',monospace;font-size:0.85rem;
+  letter-spacing:0.1em;color:var(--cyan);
+  margin-bottom:0.75rem;
+}
+.hc-desc{
+  font-size:0.75rem;line-height:1.8;
+  color:rgba(232,244,248,0.45);margin-bottom:1.25rem;
+}
+.hc-bar{
+  height:2px;background:rgba(0,255,238,0.1);
+  margin-bottom:0.4rem;position:relative;overflow:hidden;
+}
+.hc-fill{
+  position:absolute;top:0;left:0;height:100%;width:0;
+  background:linear-gradient(90deg,var(--cyan),var(--pink));
+  box-shadow:0 0 6px var(--cyan);
+  transition:width 1.5s cubic-bezier(.4,0,.2,1);
+}
+.hc-pct{font-size:0.6rem;color:var(--yellow);letter-spacing:0.15em}
+
+/* PROJECTS */
+#projects{position:relative;z-index:1;padding:5rem 0}
+.proj-list{display:flex;flex-direction:column;gap:2px;padding:0 3rem}
+.proj-item{
+  display:grid;grid-template-columns:60px 1fr auto;
+  align-items:center;gap:2rem;
+  padding:1.75rem 2rem;
+  background:var(--panel);
+  border:1px solid rgba(0,255,238,0.06);
+  position:relative;overflow:hidden;
+  transition:border-color .2s,background .2s;
+  cursor:none;
+}
+.proj-item::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink),transparent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s;
+}
+.proj-item:hover{
+  border-color:rgba(0,255,238,0.25);
+  background:rgba(0,255,238,0.02);
+}
+.proj-item:hover::after{transform:scaleX(1)}
+.proj-n{
+  font-family:'Orbitron',monospace;font-size:1.4rem;
+  color:rgba(0,255,238,0.2);font-weight:900;
+}
+.proj-info h3{
+  font-family:'Orbitron',monospace;font-size:0.9rem;
+  letter-spacing:0.1em;color:var(--white);
+  margin-bottom:0.5rem;
+}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.proj-tag{
+  font-size:0.57rem;letter-spacing:0.18em;text-transform:uppercase;
+  padding:0.2rem 0.65rem;
+  border:1px solid rgba(0,255,238,0.2);color:var(--cyan);
+}
+.proj-arrow{
+  font-family:'Orbitron',monospace;font-size:0.8rem;
+  color:rgba(0,255,238,0.25);
+  transition:color .2s,transform .2s;
+}
+.proj-item:hover .proj-arrow{color:var(--cyan);transform:translate(3px,-3px);text-shadow:0 0 8px var(--cyan)}
+
+/* STATS */
+#stats{
+  position:relative;z-index:1;padding:4rem 3rem;
+  border-top:1px solid rgba(0,255,238,0.08);
+  border-bottom:1px solid rgba(0,255,238,0.08);
+  background:var(--panel);
+}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat-blk{
+  text-align:center;padding:2rem;
+  border-right:1px solid rgba(0,255,238,0.06);
+}
+.stat-blk:last-child{border-right:none}
+.stat-n{
+  font-family:'Orbitron',monospace;font-size:2.8rem;font-weight:900;
+  color:var(--cyan);text-shadow:0 0 20px var(--cyan);
+  line-height:1;
+}
+.stat-n span{font-size:1.5rem;color:var(--pink)}
+.stat-l{
+  font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(232,244,248,0.3);margin-top:0.4rem;
+}
+
+/* CONTACT */
+#contact{position:relative;z-index:1;padding:5rem 3rem}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.contact-left h2{
+  font-family:'Orbitron',monospace;font-size:clamp(1.5rem,4vw,3rem);
+  font-weight:900;color:var(--white);
+  line-height:1.1;margin-bottom:1rem;
+}
+.contact-left h2 span{
+  color:var(--cyan);text-shadow:0 0 15px var(--cyan);
+}
+.contact-left p{
+  font-size:0.78rem;line-height:1.9;
+  color:rgba(232,244,248,0.45);margin-bottom:2rem;
+}
+.c-info{display:flex;flex-direction:column;gap:1rem}
+.ci-row{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:0.75rem;
+  border:1px solid rgba(0,255,238,0.08);
+  transition:border-color .2s;
+}
+.ci-row:hover{border-color:rgba(0,255,238,0.3)}
+.ci-k{
+  font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--pink);min-width:70px;padding-top:0.15rem;
+}
+.ci-v{font-size:0.78rem;color:var(--white)}
+.ci-v a{color:var(--cyan);text-decoration:none}
+.ci-v a:hover{text-shadow:0 0 6px var(--cyan)}
+.cyber-form{display:flex;flex-direction:column;gap:1.25rem}
+.cf-group{position:relative}
+.cf-label{
+  font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--cyan);display:block;margin-bottom:0.5rem;
+}
+.cf-input{
+  width:100%;
+  background:rgba(0,3,8,0.7);
+  border:1px solid rgba(0,255,238,0.15);
+  color:var(--white);
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.82rem;padding:0.85rem 1rem;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+}
+.cf-input:focus{
+  border-color:var(--cyan);
+  box-shadow:0 0 12px rgba(0,255,238,0.15);
+}
+.cf-input::placeholder{color:rgba(232,244,248,0.2)}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  padding:2rem 3rem;
+  border-top:1px solid rgba(0,255,238,0.1);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  background:var(--panel);
+}
+.footer-logo{
+  font-family:'Orbitron',monospace;font-size:1rem;font-weight:900;
+  color:var(--cyan);letter-spacing:0.2em;
+  text-shadow:0 0 10px var(--cyan);
+}
+.footer-info{font-size:0.6rem;letter-spacing:0.2em;color:rgba(232,244,248,0.25)}
+.footer-socials{display:flex;gap:1rem}
+.footer-socials a{
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(0,255,238,0.4);text-decoration:none;
+  transition:color .2s,text-shadow .2s;
+  padding:0.4rem 0.8rem;
+  border:1px solid rgba(0,255,238,0.1);
+}
+.footer-socials a:hover{color:var(--cyan);border-color:var(--cyan);text-shadow:0 0 6px var(--cyan)}
+
+/* BACK TOP */
+#btt{
+  position:fixed;bottom:2rem;right:2rem;z-index:900;
+  width:42px;height:42px;
+  background:none;border:1px solid var(--cyan);
+  color:var(--cyan);font-size:1rem;cursor:none;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Orbitron',monospace;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+  opacity:0;transform:translateY(10px);
+  transition:opacity .3s,transform .3s;
+  text-shadow:0 0 8px var(--cyan);
+  box-shadow:0 0 12px rgba(0,255,238,0.2);
+}
+#btt.show{opacity:1;transform:translateY(0)}
+#btt:hover{background:var(--cyan);color:var(--void)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  nav{padding:.8rem 1.5rem}
+  .nav-links{display:none}
+  #hero{flex-direction:column;padding:5rem 1.5rem 2rem;text-align:center}
+  .hero-profile{order:-1}
+  .cyber-name{font-size:1.2rem}
+  .skills-hex-grid{grid-template-columns:1fr 1fr;padding:0 1.5rem}
+  .proj-list{padding:0 1.5rem}
+  .proj-item{grid-template-columns:50px 1fr}
+  .proj-arrow{display:none}
+  #stats{padding:3rem 1.5rem}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat-blk{border-bottom:1px solid rgba(0,255,238,0.06)}
+  #contact{padding:4rem 1.5rem}
+  .contact-grid{grid-template-columns:1fr}
+  footer{padding:1.5rem}
+}
+@media(max-width:500px){
+  .skills-hex-grid{grid-template-columns:1fr}
+  .cyber-avatar{width:160px;height:160px}
+}
+</style>
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">MKA_SYS</a>
+  <ul class="nav-links">
+    <li><a href="#skills">_skills</a></li>
+    <li><a href="#projects">_projects</a></li>
+    <li><a href="#contact">_contact</a></li>
+    <li><a href="https://github.com/Dev-moe-kyawaung" target="_blank">_github</a></li>
+  </ul>
+  <div class="nav-status">ONLINE · AVAILABLE</div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-terminal reveal">
+    <div class="terminal-win">
+      <div class="terminal-bar">
+        <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+        <span class="t-title">mka@microsoft:~/portfolio_v8 ~</span>
+      </div>
+      <div class="terminal-body">
+        <div class="t-line"><span class="t-prompt">➜</span> <span class="t-cmd">whoami</span></div>
+        <div class="t-line t-out"><span class="t-key">name</span>: <span class="t-val">"Moe Kyaw Aung"</span></div>
+        <div class="t-line t-out"><span class="t-key">burmese</span>: <span class="t-val">"မိုးကျော်အောင်"</span></div>
+        <div class="t-line t-out"><span class="t-key">role</span>: <span class="t-val">"Senior Android Developer"</span></div>
+        <div class="t-line t-out"><span class="t-key">company</span>: <span class="t-val">"Microsoft"</span></div>
+        <div class="t-line t-out"><span class="t-key">location</span>: <span class="t-val">"Tachileik, Myanmar 🇲🇲"</span></div>
+        <div class="t-line t-out t-comment">// experience: nearly 12 years</div>
+        <br/>
+        <div class="t-line"><span class="t-prompt">➜</span> <span class="t-cmd">cat skills.json</span></div>
+        <div class="t-line t-out"><span class="t-key">stack</span>: [<span class="t-val">"Kotlin"</span>, <span class="t-val">"Jetpack Compose"</span>, <span class="t-val">"Firebase"</span>]</div>
+        <div class="t-line t-out"><span class="t-key">arch</span>: [<span class="t-val">"MVVM"</span>, <span class="t-val">"Clean Architecture"</span>, <span class="t-val">"Hilt"</span>]</div>
+        <div class="t-line t-out"><span class="t-key">security</span>: [<span class="t-val">"Ethical Hacking"</span>, <span class="t-val">"Pen Testing"</span>]</div>
+        <div class="t-line t-out"><span class="t-key">certifications</span>: <span class="t-val">35+</span></div>
+        <br/>
+        <div class="t-line"><span class="t-prompt">➜</span> <span class="t-cmd">git log --oneline -3</span></div>
+        <div class="t-line t-out t-success">a7f3c2e feat: MoekyawTranslator v2 — Claude API + 8 langs</div>
+        <div class="t-line t-out t-success">3b8d91a feat: PulseSync Azure — MSAL + OpenAI + SignalR</div>
+        <div class="t-line t-out t-success">f2a4e7c feat: CI/CD suite — 5 GitHub Actions workflows</div>
+        <br/>
+        <div class="t-cursor-line">
+          <span class="t-prompt">➜</span>
+          <span class="t-cmd" id="typed-cmd"></span>
+          <span class="t-blink"></span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:1rem;margin-top:1.5rem">
+      <a href="#projects" class="btn-cyber"><span>View Work →</span></a>
+      <a href="#contact" class="btn-cyber btn-cyber-pink"><span>Hire Me</span></a>
+    </div>
+  </div>
+  <div class="hero-profile reveal">
+    <div class="cyber-avatar">
+      <div class="cyber-ring1"></div>
+      <div class="cyber-ring2"></div>
+      <div class="cyber-ring3"></div>
+      <div class="cyber-img-wrap">
+        <img src="https://0.gravatar.com/avatar/a2dae9a29fbf7c72552047efc744be54a018938aacd9009e7500f93d72eb0f2e?size=400" alt="Moe Kyaw Aung"/>
+      </div>
+      <div class="cyber-scan"></div>
+    </div>
+    <div class="cyber-name">MOE KYAW AUNG</div>
+    <div class="cyber-sub">Android · Security · AI</div>
+    <div class="cyber-mm">မိုးကျော်အောင် · Microsoft</div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="cyber-section-head reveal">
+    <div class="csh-num">02</div>
+    <div class="csh-title">CORE_SKILLS</div>
+    <div class="csh-line"></div>
+  </div>
+  <div class="skills-hex-grid">
+    <div class="hex-card reveal">
+      <div class="hc-tag">[SYS::ANDROID]</div>
+      <div class="hc-title">Kotlin / Compose</div>
+      <div class="hc-desc">Full lifecycle Android development with modern Jetpack libraries and Kotlin coroutines.</div>
+      <div class="hc-bar"><div class="hc-fill" data-w="98"></div></div>
+      <div class="hc-pct">98% ▓▓▓▓▓▓▓▓▓░</div>
+    </div>
+    <div class="hex-card reveal">
+      <div class="hc-tag">[SYS::ARCH]</div>
+      <div class="hc-title">Clean Architecture</div>
+      <div class="hc-desc">MVVM + Clean Architecture, Hilt DI, multi-module Gradle systems built at scale.</div>
+      <div class="hc-bar"><div class="hc-fill" data-w="96"></div></div>
+      <div class="hc-pct">96% ▓▓▓▓▓▓▓▓▓░</div>
+    </div>
+    <div class="hex-card reveal">
+      <div class="hc-tag">[SYS::BACKEND]</div>
+      <div class="hc-title">Firebase / REST</div>
+      <div class="hc-desc">Firestore, Realtime DB, Functions, Auth, Crashlytics. REST APIs with Retrofit + OkHttp.</div>
+      <div class="hc-bar"><div class="hc-fill" data-w="94"></div></div>
+      <div class="hc-pct">94% ▓▓▓▓▓▓▓▓▓░</div>
+    </div>
+    <div class="hex-card reveal">
+      <div class="hc-tag">[SYS::SECURITY]</div>
+      <div class="hc-title">Ethical Hacking</div>
+      <div class="hc-desc">Penetration testing, certificate pinning, ProGuard, encryption, security-first design.</div>
+      <div class="hc-bar"><div class="hc-fill" data-w="88"></div></div>
+      <div class="hc-pct">88% ▓▓▓▓▓▓▓▓░░</div>
+    </div>
+    <div class="hex-card reveal">
+      <div class="hc-tag">[SYS::DEVOPS]</div>
+      <div class="hc-title">CI/CD Automation</div>
+      <div class="hc-desc">5-workflow GitHub Actions: lint, tests, signing, release, dependency audits. Zero manual steps.</div>
+      <div class="hc-bar"><div class="hc-fill" data-w="92"></div></div>
+      <div class="hc-pct">92% ▓▓▓▓▓▓▓▓▓░</div>
+    </div>
+    <div class="hex-card reveal">
+      <div class="hc-tag">[SYS::AI_ML]</div>
+      <div class="hc-title">AI / ML Integration</div>
+      <div class="hc-desc">TFLite, ML Kit, Claude API, Gemini. On-device inference and cloud AI feature integration.</div>
+      <div class="hc-bar"><div class="hc-fill" data-w="85"></div></div>
+      <div class="hc-pct">85% ▓▓▓▓▓▓▓▓░░</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-blk reveal">
+      <div class="stat-n">12<span>+</span></div>
+      <div class="stat-l">Years_Experience</div>
+    </div>
+    <div class="stat-blk reveal">
+      <div class="stat-n">48<span>+</span></div>
+      <div class="stat-l">Apps_Shipped</div>
+    </div>
+    <div class="stat-blk reveal">
+      <div class="stat-n">35<span>+</span></div>
+      <div class="stat-l">Certifications</div>
+    </div>
+    <div class="stat-blk reveal">
+      <div class="stat-n">1.2<span>M</span></div>
+      <div class="stat-l">Downloads</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="cyber-section-head reveal">
+    <div class="csh-num">04</div>
+    <div class="csh-title">PROJECTS_LOG</div>
+    <div class="csh-line"></div>
+  </div>
+  <div class="proj-list">
+    <div class="proj-item reveal">
+      <div class="proj-n">01</div>
+      <div class="proj-info">
+        <h3>MOEKYAW_TRANSLATOR</h3>
+        <div class="proj-tags"><span class="proj-tag">Kotlin</span><span class="proj-tag">Claude API</span><span class="proj-tag">Firebase</span><span class="proj-tag">8 Languages</span></div>
+      </div>
+      <div class="proj-arrow">↗</div>
+    </div>
+    <div class="proj-item reveal">
+      <div class="proj-n">02</div>
+      <div class="proj-info">
+        <h3>PULSESYNC_AZURE</h3>
+        <div class="proj-tags"><span class="proj-tag">MSAL</span><span class="proj-tag">Azure OpenAI</span><span class="proj-tag">Cosmos DB</span><span class="proj-tag">SignalR</span></div>
+      </div>
+      <div class="proj-arrow">↗</div>
+    </div>
+    <div class="proj-item reveal">
+      <div class="proj-n">03</div>
+      <div class="proj-info">
+        <h3>COMPOSE_DESIGN_SYSTEM</h3>
+        <div class="proj-tags"><span class="proj-tag">Jetpack Compose</span><span class="proj-tag">Material 3</span><span class="proj-tag">100+ Components</span></div>
+      </div>
+      <div class="proj-arrow">↗</div>
+    </div>
+    <div class="proj-item reveal">
+      <div class="proj-n">04</div>
+      <div class="proj-info">
+        <h3>CICD_SUITE_5WF</h3>
+        <div class="proj-tags"><span class="proj-tag">GitHub Actions</span><span class="proj-tag">Fastlane</span><span class="proj-tag">Auto-Release</span></div>
+      </div>
+      <div class="proj-arrow">↗</div>
+    </div>
+    <div class="proj-item reveal">
+      <div class="proj-n">05</div>
+      <div class="proj-info">
+        <h3>ACODE_DEVX_PLUGIN</h3>
+        <div class="proj-tags"><span class="proj-tag">JavaScript</span><span class="proj-tag">13 Themes</span><span class="proj-tag">v2.0.42</span><span class="proj-tag">1200+ Installs</span></div>
+      </div>
+      <div class="proj-arrow">↗</div>
+    </div>
+    <div class="proj-item reveal">
+      <div class="proj-n">06</div>
+      <div class="proj-info">
+        <h3>THAILAND_RESOURCES_HUB</h3>
+        <div class="proj-tags"><span class="proj-tag">Room DB</span><span class="proj-tag">Offline-First</span><span class="proj-tag">Bilingual</span><span class="proj-tag">Myanmar Workers</span></div>
+      </div>
+      <div class="proj-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="cyber-section-head reveal">
+    <div class="csh-num">06</div>
+    <div class="csh-title">INIT_CONTACT</div>
+    <div class="csh-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <h2>LET'S<br><span>BUILD</span><br>SOMETHING.</h2>
+      <p>Available for Android development projects, architecture consulting, security audits, and AI/ML integrations. Response within 24 hours.</p>
+      <div class="c-info">
+        <div class="ci-row"><div class="ci-k">EMAIL</div><div class="ci-v"><a href="mailto:moekyawaung@fastmail.com">moekyawaung@fastmail.com</a></div></div>
+        <div class="ci-row"><div class="ci-k">GITHUB</div><div class="ci-v"><a href="https://github.com/Dev-moe-kyawaung" target="_blank">Dev-moe-kyawaung</a></div></div>
+        <div class="ci-row"><div class="ci-k">LOCATION</div><div class="ci-v">Tachileik, Myanmar 🇲🇲</div></div>
+        <div class="ci-row"><div class="ci-k">ROLE</div><div class="ci-v">Senior Android Dev · Microsoft</div></div>
+      </div>
+    </div>
+    <form class="cyber-form reveal" onsubmit="cf(event)">
+      <div class="cf-group">
+        <label class="cf-label">[INPUT] Name</label>
+        <input type="text" class="cf-input" placeholder="Kyaw Zin Thant" required/>
+      </div>
+      <div class="cf-group">
+        <label class="cf-label">[INPUT] Email</label>
+        <input type="email" class="cf-input" placeholder="hello@example.com" required/>
+      </div>
+      <div class="cf-group">
+        <label class="cf-label">[INPUT] Message</label>
+        <textarea class="cf-input" rows="5" placeholder="Describe your project mission..." required style="resize:none"></textarea>
+      </div>
+      <button type="submit" class="btn-cyber" style="width:100%;text-align:center;padding:1rem"><span>// TRANSMIT MESSAGE</span></button>
+      <div id="ok" style="display:none;color:var(--green);font-size:0.65rem;letter-spacing:0.25em;margin-top:0.75rem">
+        [SUCCESS] MESSAGE TRANSMITTED. AWAITING RESPONSE.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">MKA_SYS v8.0</div>
+  <div class="footer-info">© 2025 မိုးကျော်အောင် · TACHILEIK,MM · ALL RIGHTS RESERVED</div>
+  <div class="footer-socials">
+    <a href="https://github.com/Dev-moe-kyawaung" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/moe-kyaw-aung-2653093a1" target="_blank">LinkedIn</a>
+    <a href="https://bsky.app/profile/moekyawaung96.bsky.social" target="_blank">Bluesky</a>
+  </div>
+</footer>
+
+<button id="btt" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ── Matrix rain ───────────────────────────────────────
+const mc=document.getElementById('matrix');
+const mx2=mc.getContext('2d');
+mc.width=innerWidth;mc.height=innerHeight;
+addEventListener('resize',()=>{mc.width=innerWidth;mc.height=innerHeight});
+const chars='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF♦ကခဂဃငစဆဇဈညဋဌဍဎဏတထဒဓနပဖဗဘမယရလဝသဟဠအ';
+const cols=Math.floor(innerWidth/16);
+const drops=Array(cols).fill(1);
+function drawMatrix(){
+  mx2.fillStyle='rgba(0,3,8,0.05)';
+  mx2.fillRect(0,0,mc.width,mc.height);
+  mx2.fillStyle='#00ff41';
+  mx2.font='14px Share Tech Mono';
+  drops.forEach((y,i)=>{
+    const ch=chars[Math.floor(Math.random()*chars.length)];
+    mx2.fillText(ch,i*16,y*16);
+    if(y*16>mc.height&&Math.random()>.975)drops[i]=0;
+    drops[i]++;
+  });
+}
+setInterval(drawMatrix,50);
+
+// ── Custom cursor ─────────────────────────────────────
+const cur=document.getElementById('cur');
+const cur2=document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+(function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+cur2.style.left=rx+'px';cur2.style.top=ry+'px';requestAnimationFrame(a)})();
+
+// ── Reveal ────────────────────────────────────────────
+const obs=new IntersectionObserver(e=>e.forEach(en=>{
+  if(en.isIntersecting){
+    en.target.classList.add('in');
+    en.target.querySelectorAll('.hc-fill').forEach(b=>b.style.width=b.dataset.w+'%');
+  }
+}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── Back to top ───────────────────────────────────────
+addEventListener('scroll',()=>document.getElementById('btt').classList.toggle('show',scrollY>400));
+
+// ── Typing animation ──────────────────────────────────
+const cmds=['hire --android-dev','cat portfolio.json','git push origin main'];
+let ci=0,ci2=0,deleting=false;
+const typedEl=document.getElementById('typed-cmd');
+function type(){
+  const cmd=cmds[ci];
+  if(!deleting&&ci2<=cmd.length){
+    typedEl.textContent=cmd.slice(0,ci2++);
+    setTimeout(type,80);
+  } else if(!deleting&&ci2>cmd.length){
+    deleting=true;setTimeout(type,1800);
+  } else if(deleting&&ci2>0){
+    typedEl.textContent=cmd.slice(0,--ci2);
+    setTimeout(type,40);
+  } else {
+    deleting=false;ci=(ci+1)%cmds.length;setTimeout(type,500);
+  }
+}
+type();
+
+// ── Form ──────────────────────────────────────────────
+function cf(e){
+  e.preventDefault();
+  document.getElementById('ok').style.display='block';
+  e.target.reset();
+  setTimeout(()=>document.getElementById('ok').style.display='none',6000);
+}
+</script>
+</body>
+</html>
